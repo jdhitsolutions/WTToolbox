@@ -1,67 +1,12 @@
 Function Get-WTKeyBinding {
 
-    <#
-.Synopsis
-Display Windows Terminal key binding information
-.Description
-Get Windows Terminal key binding settings and display with your choice of formats.
-If a keybinding from your settings.json file has the same keys as a default, the
-default is overwritten in the output.
-.Parameter Format
-Specify how to display the results. Possible values are:
-
-   * Table
-   * List
-   * Grid
-   * None
-
-Specify None to get the custom object output. This parameter has an alias
-of 'out'.
-.Example
-PS C:\>  c:\scripts\Get-WTKeyBindings -format grid
-
-This is a PowerShell script so you need to specify the path to the file.
-#>
-
-
     [cmdletbinding()]
     Param(
         [Parameter(HelpMessage = "Specify how to display the results")]
         [ValidateSet("Table", "Grid", "List", "None")]
         [alias("out")]
-        [string]$Format = "Table"
-    )
-
-    #a private helper function to parse the key settings into more manageable objects
-    Function parsesetting {
-        [cmdletbinding()]
-        param(
-            [parameter(Mandatory, ValueFromPipeline)]
-            [object]$Setting)
-
-        Process {
-            if ($setting.command -is [string]) {
-                $cmd = $setting.command
-                #assuming there is only a single key binding
-                #it is also possible the json file may use array syntax
-                #even though a single key combination is specified
-                $keys = $setting.keys | Select-Object -first 1
-                $actionsettings = $null
-            }
-            else {
-                $cmd = $setting.command.action
-                $keys = $Setting.keys | Select-Object -first 1
-                #join other action settings into a string
-                $other = $setting.command.psobject.properties.where( {$_.name -ne 'action'}) | ForEach-Object {"$($_.Name) = $($_.value)"}
-                $actionsettings = $other -join ";"
-            }
-            [pscustomobject]@{
-                Action         = $cmd
-                ActionSettings = $actionsettings
-                Keys           = $keys
-            }
-        }
-    }
+        [string]$Format = "None"
+    ) 
 
     #use a list object to make it easier to remove duplicate keybindings
     $list = [System.Collections.Generic.List[Object]]::new()

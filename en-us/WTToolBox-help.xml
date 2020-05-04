@@ -6,11 +6,11 @@
       <command:verb>Backup</command:verb>
       <command:noun>WTSetting</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Backup Windows Terminal settings.json file.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Use this command to create a backup copy of the settings.json file for Windows Terminal. Each backup will be numbered up to the the specified limit. The oldest file will be called settings.bak1.json with the number incrementing for each backup.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -18,19 +18,19 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>Limit</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill Limit Description }}</maml:para>
+            <maml:para>The number of backup files to keep.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
             <maml:name>Int32</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <dev:defaultValue>7</dev:defaultValue>
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Destination</maml:name>
           <maml:Description>
-            <maml:para>Specify the backup location</maml:para>
+            <maml:para>Specify the backup location. It must exist.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -61,6 +61,17 @@
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Passthru</maml:name>
+          <maml:Description>
+            <maml:para>Write backup file objects to the pipeline. Otherwise the command doesn't write anything to the pipeline.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -79,7 +90,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>Destination</maml:name>
         <maml:Description>
-          <maml:para>Specify the backup location</maml:para>
+          <maml:para>Specify the backup location. It must exist.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -91,19 +102,31 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>Limit</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill Limit Description }}</maml:para>
+          <maml:para>The number of backup files to keep.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
           <maml:name>Int32</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <dev:defaultValue>7</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi">
         <maml:name>WhatIf</maml:name>
         <maml:Description>
           <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Passthru</maml:name>
+        <maml:Description>
+          <maml:para>Write backup file objects to the pipeline. Otherwise the command doesn't write anything to the pipeline.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -126,7 +149,15 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.IO.FileInfo</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -135,15 +166,15 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Backup-WTSetting -destination D:\OneDrive\Backups</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Create backups to D:\OneDrive\Backups using the default limit.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -169,14 +200,14 @@
           <maml:Description>
             <maml:para>Specify how to display the results. Possible values are:</maml:para>
             <maml:para>   * Table    * List    * Grid    * None</maml:para>
-            <maml:para>Specify None to get the custom object output. This parameter has an alias of 'out'.</maml:para>
+            <maml:para>This parameter has an alias of 'out'.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>Table</dev:defaultValue>
+          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
@@ -186,21 +217,38 @@
         <maml:Description>
           <maml:para>Specify how to display the results. Possible values are:</maml:para>
           <maml:para>   * Table    * List    * Grid    * None</maml:para>
-          <maml:para>Specify None to get the custom object output. This parameter has an alias of 'out'.</maml:para>
+          <maml:para>This parameter has an alias of 'out'.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>Table</dev:defaultValue>
+        <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes />
-    <command:returnValues />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Custom Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -220,11 +268,11 @@
       <command:verb>Get</command:verb>
       <command:noun>WTProcess</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Get Windows Terminal processes</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Use this command to get all processes that are part of the current Windows Terminal application.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -245,7 +293,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>[System.Diagnostics.Process]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -254,15 +302,29 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Get-WTProcess
+
+Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
+-------  ------    -----      -----     ------     --  -- -----------
+    913      48   110304      95016     458.05   7112   1 WindowsTerminal
+    150      10     2264       7092       0.80   8600   1 OpenConsole
+   2387     149   373980     351940      40.28  32548   1 pwsh
+    150      11     2300       7272      54.94   9080   1 OpenConsole
+   1912     106   517584     300388     124.61   3680   1 powershell
+    150      10     2208       7748       0.13  14292   1 OpenConsole
+    743      50   176648     124820       7.64  29668   1 powershell
+    144      10     2228       8888       0.14  14132   1 OpenConsole
+     67       5     4128       3632       0.02  31992   1 cmd
+    148      11     2236       8900       0.16  26764   1 OpenConsole
+    116       7     1248       5620       0.03  15308   1 wsl</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -274,11 +336,11 @@
       <command:verb>Open</command:verb>
       <command:noun>WTDefault</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Open Windows Terminal default.json file</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Windows Terminal uses a default.json file for default settings that can be overwritten with your settings.json file. This command will open the defaults.json file using the application associated with json files.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -299,7 +361,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>None</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -308,15 +370,15 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para></maml:para>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt;  Open-WTDefault</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>

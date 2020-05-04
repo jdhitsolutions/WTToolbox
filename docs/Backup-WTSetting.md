@@ -8,29 +8,34 @@ schema: 2.0.0
 # Backup-WTSetting
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Backup Windows Terminal settings.json file.
 
 ## SYNTAX
 
-```
-Backup-WTSetting [[-Limit] <Int32>] [-Destination] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+```yaml
+Backup-WTSetting [[-Limit] <Int32>] [-Destination] <String> [-Passthru] [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+Use this command to create a backup copy of the settings.json file for Windows Terminal. Each backup will be numbered up to the the specified limit. The oldest file will be called settings.bak1.json with the number incrementing for each backup.
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Backup-WTSetting -destination D:\OneDrive\Backups
 ```
 
-{{ Add example description here }}
+Create backups to D:\OneDrive\Backups using the default limit.
 
 ## PARAMETERS
 
 ### -Confirm
+
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
@@ -40,13 +45,14 @@ Aliases: cf
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Destination
-Specify the backup location
+
+Specify the backup location. It must exist.
 
 ```yaml
 Type: String
@@ -61,7 +67,8 @@ Accept wildcard characters: False
 ```
 
 ### -Limit
-{{ Fill Limit Description }}
+
+The number of backup files to keep.
 
 ```yaml
 Type: Int32
@@ -70,12 +77,13 @@ Aliases:
 
 Required: False
 Position: 0
-Default value: None
+Default value: 7
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -WhatIf
+
 Shows what would happen if the cmdlet runs.
 The cmdlet is not run.
 
@@ -86,12 +94,29 @@ Aliases: wi
 
 Required: False
 Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Passthru
+
+Write backup file objects to the pipeline. Otherwise the command doesn't write anything to the pipeline.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -100,7 +125,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### None
+
+### System.IO.FileInfo
+
 ## NOTES
+
+Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
 
 ## RELATED LINKS

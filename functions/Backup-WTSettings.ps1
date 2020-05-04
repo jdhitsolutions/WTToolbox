@@ -8,66 +8,78 @@ Function Backup-WTSetting {
         #how many backup copies should be saved
         [int]$Limit = 7,
         #backup folder
-        [parameter(Mandatory, HelpMessage = "Specify the backup location")]
+        [parameter(Mandatory, HelpMessage = "Specify the backup location. It must already exist.")]
         [ValidateScript( {Test-Path $_})]
-        [string]$Destination
+        [string]$Destination,
+        [switch]$Passthru
     )
 
+    Write-Verbose "Starting $($myinvocation.MyCommand)"
     $json = "$ENV:Userprofile\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 
-    Write-Verbose "Backing up $json to $Destination"
-    Write-Verbose "Get existing backups and save as an array sorted by name"
+    if (Test-Path $json) {
 
-    [array]$bak = Get-ChildItem -path $Destination -Name settings.bak*.json | Sort-Object -Property name
+        Write-Verbose "Backing up $json to $Destination"
+        Write-Verbose "Get existing backups and save as an array sorted by name"
 
-    if ($bak.count -eq 0) {
-        Write-Verbose "Creating first backup copy."
-        [int]$new = 1
+        [array]$bak = Get-ChildItem -path $Destination -Name settings.bak*.json | Sort-Object -Property LastWriteTimeString
+
+        if ($bak.count -eq 0) {
+            Write-Verbose "Creating first backup copy."
+            [int]$new = 1
+        }
+        else {
+            #get the numeric value
+            [int]$counter = ([regex]"\d+").match($bak[-1]).value
+            Write-Verbose "Last backup is #$counter"
+
+            [int]$new = $counter + 1
+            Write-Verbose "Creating backup copy $new"
+        }
+
+        $backup = Join-Path -path $Destination -ChildPath "settings.bak$new.json"
+        Write-Verbose "Creating backup $backup"
+        Copy-Item -Path $json -Destination $backup
+
+        #update the list of backups sorted by age and delete extras
+        Write-Verbose "Removing any extra backup files over the limit of $Limit"
+
+        Get-ChildItem -path $Destination\settings.bak*.json |
+        Sort-Object -Property LastWriteTime -Descending |
+        Select-Object -Skip $Limit | Remove-Item
+
+        #renumber backup files
+        Write-Verbose "Renumbering backup files"
+        <#
+    You can't rename a file if it will conflict with an existing file so files will be copied
+    to a temp folder with a new name, the old file deleted and then the copy restored
+    #>
+        Get-ChildItem -path $Destination\settings.bak*.json |
+        Sort-Object -Property LastWriteTime |
+        ForEach-Object -Begin {$n = 0} -process {
+            #rename each file with a new number
+            $n++
+            $temp = Join-Path -path $env:TEMP -ChildPath "settings.bak$n.json"
+
+            Write-Verbose "Copying temp file to $temp"
+            $_ | Copy-Item -Destination $temp
+
+            Write-Verbose "Removing $($_.name)"
+            $_ | Remove-Item
+
+        } -end {
+            Write-Verbose "Restoring temp files to $Destination"
+            Get-ChildItem -Path "$env:TEMP\settings.bak*.json" | Move-Item -Destination $Destination -PassThru:$passthru
+        }
+
+  <#      if ($passthru) {
+            #show current backup files
+            Get-ChildItem -path $Destination\settings.bak*.json | Sort-Object -Property LastWriteTime -Descending
+        }
+        #>
     }
     else {
-        #get the numeric value
-        [int]$counter = ([regex]"\d+").match($bak[-1]).value
-        Write-Verbose "Last backup is #$counter"
-
-        [int]$new = $counter + 1
-        Write-Verbose "Creating backup copy $new"
+        Write-Warning "Failed to find expected settings file $json"
     }
-
-    $backup = Join-Path -path $Destination -ChildPath "settings.bak$new.json"
-    Write-Verbose "Creating backup $backup"
-    Copy-Item -Path $json -Destination $backup
-
-    #update the list of backups sorted by age and delete extras
-    Write-Verbose "Removing any extra backup files over the limit of $Limit"
-
-    Get-ChildItem -path $Destination\settings.bak*.json |
-    Sort-Object -Property LastWriteTime -Descending |
-    Select-Object -Skip $Limit | Remove-Item
-
-    #renumber backup files
-    Write-Verbose "Renumbering backup files"
-    <#
-You can't rename a file if it will conflict with an existing file so files will be copied
-to a temp folder with a new name, the old file deleted and then the copy restored
-#>
-    Get-ChildItem -path $Destination\settings.bak*.json |
-    Sort-Object -Property LastWriteTime |
-    ForEach-Object -Begin {$n = 0} -process {
-        #rename each file with a new number
-        $n++
-        $temp = Join-Path -path $env:TEMP -ChildPath "settings.bak$n.json"
-
-        Write-Verbose "Copying temp file to $temp"
-        $_ | Copy-Item -Destination $temp
-
-        Write-Verbose "Removing $($_.name)"
-        $_ | Remove-Item
-
-    } -end {
-        Write-Verbose "Restoring temp files to $Destination"
-        Get-ChildItem -Path "$env:TEMP\settings.bak*.json" | Move-Item -Destination $Destination
-    }
-
-    #show current backup files
-    Get-ChildItem -path $Destination\settings.bak*.json | Sort-Object -Property LastWriteTime -Descending
+        Write-Verbose "Ending $($myinvocation.MyCommand)"
 }
