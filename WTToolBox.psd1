@@ -100,7 +100,7 @@
             ProjectUri = 'https://github.com/jdhitsolutions/WTToolbox'
 
             # A URL to an icon representing this module.
-            # IconUri = ''
+            IconUri = 'https://github.com/jdhitsolutions/WTToolbox/blob/v1.0.0/assets/wt-icon.png'
 
             # ReleaseNotes of this module
             # ReleaseNotes = ''
