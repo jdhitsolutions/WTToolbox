@@ -4,11 +4,18 @@ Function Open-WTDefault {
     [CmdletBinding()]
     Param()
 
-    $json = Join-Path -path (Get-AppxPackage Microsoft.WindowsTerminal).InstallLocation -ChildPath defaults.json
-    if (Test-Path $json) {
-        Invoke-Item $json
+    $app = Get-AppxPackage Microsoft.WindowsTerminal
+
+    if (Test-Path $app.InstallLocation) {
+        $json = Join-Path -path $app.installlocation -ChildPath defaults.json
+        if (Test-Path $json) {
+            Invoke-Item $json
+        }
+        else {
+            Write-Warning "Could not find default.json file."
+        }
     }
     else {
-        Write-Warning "Could not find default.json file."
+        Throw "WindowsTerminal is not installed"
     }
 }

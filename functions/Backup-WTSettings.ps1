@@ -20,15 +20,16 @@ Function Backup-WTSetting {
     if (Test-Path $json) {
 
         Write-Verbose "Backing up $json to $Destination"
-        Write-Verbose "Get existing backups and save as an array sorted by name"
+        Write-Verbose "Get existing backups from $Destination and saving as an array sorted by name"
 
-        [array]$bak = Get-ChildItem -path $Destination -Name settings.bak*.json | Sort-Object -Property LastWriteTimeString
+        [array]$bak = Get-ChildItem -path $Destination\settings.bak*.json | Sort-Object -Property LastWriteTimeString
 
         if ($bak.count -eq 0) {
             Write-Verbose "Creating first backup copy."
             [int]$new = 1
         }
         else {
+            $bak | Out-String | Write-Verbose
             #get the numeric value
             [int]$counter = ([regex]"\d+").match($bak[-1]).value
             Write-Verbose "Last backup is #$counter"
@@ -72,11 +73,6 @@ Function Backup-WTSetting {
             Get-ChildItem -Path "$env:TEMP\settings.bak*.json" | Move-Item -Destination $Destination -PassThru:$passthru
         }
 
-  <#      if ($passthru) {
-            #show current backup files
-            Get-ChildItem -path $Destination\settings.bak*.json | Sort-Object -Property LastWriteTime -Descending
-        }
-        #>
     }
     else {
         Write-Warning "Failed to find expected settings file $json"

@@ -8,7 +8,7 @@
     RootModule = 'WTToolBox.psm1'
 
     # Version number of this module.
-    ModuleVersion = '0.2.0'
+    ModuleVersion = '1.0.0'
 
     # Supported PSEditions
     CompatiblePSEditions = @('Desktop','Core')
@@ -32,7 +32,7 @@
     PowerShellVersion = '5.1'
 
     # Name of the Windows PowerShell host required by this module
-    PowerShellHostName = 'ConsoleHost'
+    #PowerShellHostName = 'ConsoleHost'
 
     # Minimum version of the Windows PowerShell host required by this module
     # PowerShellHostVersion = ''
@@ -68,7 +68,7 @@
     FunctionsToExport = 'Backup-WTSetting','Get-WTKeyBinding','Get-WTProcess','Open-WTDefault'
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
-    CmdletsToExport = '*'
+    CmdletsToExport = ''
 
     # Variables to export from this module
     VariablesToExport = ''
@@ -94,10 +94,10 @@
             Tags = @('WindowsTerminal')
 
             # A URL to the license for this module.
-            # LicenseUri = ''
+            LicenseUri = 'https://github.com/jdhitsolutions/WTToolbox/blob/master/license.txt'
 
             # A URL to the main website for this project.
-            # ProjectUri = ''
+            ProjectUri = 'https://github.com/jdhitsolutions/WTToolbox'
 
             # A URL to an icon representing this module.
             # IconUri = ''

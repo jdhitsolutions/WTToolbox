@@ -1,0 +1,1 @@
+Image files and other assets mostly used for GitHub.
