@@ -31,3 +31,18 @@ Function parsesetting {
         }
     }
 }
+
+Function AddWTSettingsVariable {
+    [cmdletbinding()]
+    Param()
+
+    $obj = (Get-Content -path $Global:WTSettingsPath).where({$_ -notmatch "//"}) | ConvertFrom-Json
+    #add a few custom properties
+    $obj | Add-Member -MemberType NoteProperty -Name Computername -Value $env:COMPUTERNAME
+    $obj | Add-Member -MemberType NoteProperty -Name LastUpdated -Value ((Get-Item -path $Global:WTSettingsPath).LastWriteTime)
+    $obj | Add-Member -MemberType NoteProperty -Name LastRefresh -Value (Get-Date)
+    #add a method to refresh the value
+    $obj | Add-Member -MemberType ScriptMethod -Name Refresh -Value { AddWTSettingsVariable  }
+    Set-Variable -Name WTSettings -Scope Global -Value $obj
+
+}

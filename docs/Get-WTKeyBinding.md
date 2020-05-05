@@ -37,12 +37,7 @@ This is a PowerShell script so you need to specify the path to the file.
 ### -Format
 
 Specify how to display the results.
-Possible values are:
-
-   * Table
-   * List
-   * Grid
-   * None
+Possible values are:  Table,List,Grid, and None
 
 This parameter has an alias of 'out'.
 
@@ -53,7 +48,7 @@ Aliases: out
 
 Required: False
 Position: 1
-Default value: None
+Default value: "None"
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

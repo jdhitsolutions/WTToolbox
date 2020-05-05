@@ -14,6 +14,10 @@ InModuleScope WTToolBox {
             {Test-ModuleManifest -Path "$PSScriptRoot\..\WTToolBox.psd1"} | Should Not Throw True
         }
 
+        It "Should export 5 commands" {
+            ( (Get-Module WTToolbox).ExportedCommands).count | Should Be 5
+        }
+
         $psdata = (Get-Module WTToolBox).PrivateData.psdata
         It "Should have a project uri" {
             $psdata.projecturi | Should Match "^http"
@@ -55,7 +59,6 @@ InModuleScope WTToolBox {
 
         Context Structure {
             $thiscmd = Get-Item -path Function:Backup-WTSetting
-            $pathParam = $thiscmd.Parameters["Path"].Attributes.where({$_.typeid.name -eq 'ParameterAttribute'})
 
             It "Should use cmdletbinding" {
                 $thiscmd.CmdletBinding | should Be True
@@ -120,7 +123,6 @@ InModuleScope WTToolBox {
 
         Context Structure {
             $thiscmd = Get-Item Function:Get-WTKeyBinding
-            $pathParam = $thiscmd.Parameters["Path"].Attributes.where({$_.typeid.name -eq 'ParameterAttribute'})
 
             It "Should use cmdletbinding" {
                 $thiscmd.CmdletBinding | should Be True
@@ -223,7 +225,6 @@ return $fake
 
         Context Structure {
             $thiscmd = Get-Item Function:Get-WTProcess
-            $pathParam = $thiscmd.Parameters["Path"].Attributes.where({$_.typeid.name -eq 'ParameterAttribute'})
 
             It "Should use cmdletbinding" {
                 $thiscmd.CmdletBinding | should Be True
@@ -238,10 +239,9 @@ return $fake
 
         Context Output {
 
-            $pid = 100
             Mock Get-CimInstance {
                   @{ParentProcessID=123}
-            } -ParameterFilter {$Classname -eq "Win32_Process" -AND $filter -eq "ProcessID=$PID"}
+            } -ParameterFilter {$Classname -eq "Win32_Process" -AND $filter -eq "ProcessID=$pid"}
 
             Mock Get-CimInstance {
                  return  @(@{ProcessID = 300},@{ProcessID=200})
@@ -261,13 +261,13 @@ return $fake
 
             $r = Get-WTProcess
 
-            It "Should call Get-Ciminstance" {
+            It "Should call Get-Ciminstance 2 times" {
                 Assert-MockCalled Get-Ciminstance -Times 2 -Scope context
             }
-            It "Should call Get-Process" {
+            It "Should call Get-Process 3 times" {
                 Assert-MockCalled Get-Process -Times 3 -Scope context
             }
-            It "Should write an object to the pipeline" {
+            It "Should write 3 objects to the pipeline" {
                 $r.count | Should be 3
             }
 
@@ -285,7 +285,6 @@ return $fake
 
         Context Structure {
             $thiscmd = Get-Item Function:Open-WTDefault
-            $pathParam = $thiscmd.Parameters["Path"].Attributes.where({$_.typeid.name -eq 'ParameterAttribute'})
 
             It "Should use cmdletbinding" {
                 $thiscmd.CmdletBinding | should Be True
@@ -321,4 +320,44 @@ return $fake
         } #context output
     } #Describe Open-WTDefault
 
+    Describe "Test-WTVersion" {
+        Context Structure {
+            $thiscmd = Get-Item Function:Test-WTVersion
+
+            It "Should use cmdletbinding" {
+                $thiscmd.CmdletBinding | should Be True
+            }
+
+            It "Should have documentation" {
+                $h = Get-Help Test-WTVersion
+                $h.description | Should Not Be Null
+                $h.examples | Should Not Be Null
+            }
+        }
+
+        Context Output {
+
+                Mock Test-Path {$True}
+                Mock Get-Content {
+@"
+{
+"VersionString": "1.0.0"
+}
+"@
+
+                } -parameterfilter {$Path -eq "$home\wtver.json"}
+                Mock ConvertTo-Json {}
+                Mock Out-File {}
+
+            It "Should throw an exception if Windows Terminal is not Installed" {
+                Mock Get-AppXPackage {}
+                {Test-WTVersion} | Should Throw
+            }
+
+            It "Should return a boolean result" {
+                Mock Get-AppXPackage {@{Version="1.0.1"}}
+                Test-WTVersion| Should be True
+            }
+        }
+    }
 } #in module scope

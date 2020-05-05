@@ -198,8 +198,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="out">
           <maml:name>Format</maml:name>
           <maml:Description>
-            <maml:para>Specify how to display the results. Possible values are:</maml:para>
-            <maml:para>   * Table    * List    * Grid    * None</maml:para>
+            <maml:para>Specify how to display the results. Possible values are:  Table,List,Grid, and None</maml:para>
             <maml:para>This parameter has an alias of 'out'.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -207,7 +206,7 @@
             <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
+          <dev:defaultValue>"None"</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
@@ -215,8 +214,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="out">
         <maml:name>Format</maml:name>
         <maml:Description>
-          <maml:para>Specify how to display the results. Possible values are:</maml:para>
-          <maml:para>   * Table    * List    * Grid    * None</maml:para>
+          <maml:para>Specify how to display the results. Possible values are:  Table,List,Grid, and None</maml:para>
           <maml:para>This parameter has an alias of 'out'.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -224,7 +222,7 @@
           <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
+        <dev:defaultValue>"None"</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes />
@@ -379,6 +377,71 @@ Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
         <dev:code>PS C:\&gt;  Open-WTDefault</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Test-WTVersion</command:name>
+      <command:verb>Test</command:verb>
+      <command:noun>WTVersion</command:noun>
+      <maml:description>
+        <maml:para>Test if newer version of Windows Terminal is installed.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Because Windows Terminal can update in the background, you may not be aware that you are running a newer version. A newer version might offer new features to enable in your settings file or things that you have to change. This command will compare the currently installed version with saved information from the last time the command was run. If the version is newer, this command returns True. The command writes a small json file to $Home.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Test-WTVersion</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Boolean</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Test-WTVersion
+False</dev:code>
+        <dev:remarks>
+          <maml:para>Windows Terminal has not changed since the last check.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; if ( $env:wt_session -AND Test-WTVersion) {
+    Write-Host "A newer version of Windows Terminal is now installed." -foreground Yellow
+    Start-Process https://github.com/microsoft/terminal/releases
+}</dev:code>
+        <dev:remarks>
+          <maml:para>Because Windows Terminal can silently update, it may be difficult to know if you are running a new version. You might use the `Test-WTVersion` command in your PowerShell profile script with this code snippet.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
