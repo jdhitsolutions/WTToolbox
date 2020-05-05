@@ -4,6 +4,8 @@
 
 ![WindowsTerminal](assets/wt-icon.png)
 
+## Windows Terminal PowerShell Toolbox
+
 A set of PowerShell functions for managing and working with the [Windows Terminal](https://www.microsoft.com/store/productId/9N0DX20HK701) application from Microsoft. You can download the module from the PowerShell Gallery. It should work on Windows platforms under Windows PowerShell and PowerShell 7.
 
 ```powershell
@@ -93,6 +95,6 @@ The method doesn't write anything to the pipeline.
 
 ## Future Versions
 
-If you have any suggestions for enhancements or bug reports, please use the Issues section.
+If you have any suggestions for enhancements or bug reports, please use the Issues section of this repository.
 
 Last updated 2020-05-05 14:27:45Z UTC
