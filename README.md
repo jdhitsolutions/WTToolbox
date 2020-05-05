@@ -4,7 +4,12 @@
 
 ![WindowsTerminal](assets/wt-icon.png)
 
-A set of PowerShell functions for managing and working with the [Windows Terminal](https://www.microsoft.com/store/productId/9N0DX20HK701) application from Microsoft.
+A set of PowerShell functions for managing and working with the [Windows Terminal](https://www.microsoft.com/store/productId/9N0DX20HK701) application from Microsoft. You can download the module from the PowerShell Gallery. It should work on Windows platforms under Windows PowerShell and PowerShell 7.
+
+```powershell
+Install-Module WTToolBox
+```
+Of course, it is assumed you have Windows Terminal installed or planned to. If Windows Terminal is not installed, you will get an warning message when you import this module.
 
 ## Module Commands
 
@@ -38,7 +43,7 @@ The path to `settings.json` is buried in your AppData folder. You can use `$WTSe
 You can use `$WTDefaults` as an object to view any number of default settings. Use `Open-WTDefaults` if you want to open the file in your code editor.
 
 ```powershell
-PS C:>\ $WTDefaults | Select initial*
+PS C:>\ $WTDefaults | Select-Object -property initial*
 
 initialCols initialRows
 ----------- -----------
@@ -50,7 +55,7 @@ initialCols initialRows
 The last object is a customized version of the data in `settings.json`. This should make it easier to see your settings.
 
 ```powershell
-PS C:\> $wtsettings.profiles.list | where hidden
+PS C:\> $wtsettings.profiles.list | where-object hidden
 
 guid       : {b453ae62-4e3d-5e58-b989-0a998ec441b8}
 hidden     : True
