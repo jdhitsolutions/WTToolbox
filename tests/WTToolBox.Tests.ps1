@@ -14,8 +14,8 @@ InModuleScope WTToolBox {
             {Test-ModuleManifest -Path "$PSScriptRoot\..\WTToolBox.psd1"} | Should Not Throw True
         }
 
-        It "Should export 5 commands" {
-            ( (Get-Module WTToolbox).ExportedCommands).count | Should Be 5
+        It "Should export 6 commands" {
+            ( (Get-Module WTToolbox).ExportedCommands).count | Should Be 6
         }
 
         $psdata = (Get-Module WTToolBox).PrivateData.psdata
@@ -359,5 +359,68 @@ return $fake
                 Test-WTVersion| Should be True
             }
         }
-    }
+    } #describe test-WTVersion
+
+    Describe 'Get-WTReleaseNote' {
+        Context Structure {
+
+            $thiscmd = Get-Item Function:Get-WTReleaseNote
+
+            It "Should use cmdletbinding" {
+                $thiscmd.CmdletBinding | Should Be True
+            }
+
+            It "Should have documentation" {
+                $h = Get-Help Test-WTVersion
+                $h.description | Should Not Be Null
+                $h.examples | Should Not Be Null
+            }
+
+            It "Has a single parameter of AsMarkdown" {
+                $thiscmd.parameters.keys -contains "AsMarkdown" | Should be True
+            }
+
+            It "The AsMarkdown parameter has an alias of md" {
+                $thiscmd.parameters["AsMarkdown"].Aliases -contains "md" | Should Be True
+            }
+        }
+
+        Context Output {
+            Mock Invoke-RestMethod {
+                [pscustomobject]@{
+                    prerelease = "True"
+                    name = "Windows Terminal"
+                    published_at = "2020-05-05T22:25:47Z"
+                    tag_name = "v0.11.0"
+                    body = "foo"
+                }
+            }
+
+            $r = Get-WTReleaseNote
+
+            It "Should call Invoke-RestMethod" {
+                Assert-MockCalled Invoke-RestMethod -times 1
+            }
+            It "Should create a custom object" {
+                $r | Should BeofType "PSCustomObject"
+                $r.name | Should be "Windows Terminal"
+                $r.Version | Should be "v0.11.0"
+                $r.Notes | Should be "foo"
+                $r.prerelease | should be "true"
+                $r.prerelease | Should BeOfType "boolean"
+                $r.published | Should  BeOfType "DateTime"
+            }
+
+            It "Should create a string object for markdown" {
+                $md = Get-WTReleaseNote -asmarkdown
+                $md | Should BeofType "string"
+            }
+
+            It "Should throw an exception if GitHub can't be reached" {
+                Mock Invoke-RestMethod {}
+                {Get-WTReleaseNote} | Should Throw
+            }
+        }
+
+    } #describe Get-WTReleaseNote
 } #in module scope

@@ -36,13 +36,23 @@ Function AddWTSettingsVariable {
     [cmdletbinding()]
     Param()
 
+    Write-Verbose "Parsing $global:WTSettingsPath"
     $obj = (Get-Content -path $Global:WTSettingsPath).where({$_ -notmatch "//"}) | ConvertFrom-Json
-    #add a few custom properties
-    $obj | Add-Member -MemberType NoteProperty -Name Computername -Value $env:COMPUTERNAME
-    $obj | Add-Member -MemberType NoteProperty -Name LastUpdated -Value ((Get-Item -path $Global:WTSettingsPath).LastWriteTime)
-    $obj | Add-Member -MemberType NoteProperty -Name LastRefresh -Value (Get-Date)
-    #add a method to refresh the value
-    $obj | Add-Member -MemberType ScriptMethod -Name Refresh -Value { AddWTSettingsVariable  }
-    Set-Variable -Name WTSettings -Scope Global -Value $obj
+
+    #only continue if there is an object
+    if ($obj) {
+        Write-Verbose "Adding custom properties"
+        Add-Member -inputObject $obj -MemberType NoteProperty -Name Computername -Value $env:COMPUTERNAME
+        Add-Member -inputObject $obj-MemberType NoteProperty -Name LastUpdated -Value ((Get-Item -path $Global:WTSettingsPath).LastWriteTime)
+        Add-Member -inputObject $obj-MemberType NoteProperty -Name LastRefresh -Value (Get-Date)
+
+        Write-Verbose "Adding a method to refresh the object"
+        Add-Member -inputObject $obj -MemberType ScriptMethod -Name Refresh -Value { AddWTSettingsVariable  }
+        Write-Verbose "Setting the WTSettings variable in the global scope"
+        Set-Variable -Name WTSettings -Scope Global -Value $obj
+    }
+    else {
+        Write-Warning "Failed to create the settings object."
+    }
 
 }

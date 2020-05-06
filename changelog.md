@@ -1,12 +1,19 @@
 # Change Log for WTToolBox
 
+## 1.2.0
+
++ Added 'Get-WTReleaseNote`
++ Updated Pester test
++ Modified private function `AddWTSettingsVariable` to solve `Add-Member` problem. (Issue #1)
++ Modified `WTToolbox.psm1` to add Verbose support
+
 ## 1.1.0
 
 + Added `Test-WTVersion`
 + Modified module to create a global variable `$WTSettings` with a converted version of `settings.json`.
 + Modified module to create a global variable `WTSettingsPath` with the path to the `setting.json` file.
 + Modified module to create a global variable `$WTDefaults` with a converted version of `defaults.json`.
-+ Added a private function called `AddWTSettingsVariable    .
++ Added a private function called `AddWTSettingsVariable.
 + Updated `README.md`.
 + Minor help revisions
 + Updated Pester test file

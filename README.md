@@ -11,12 +11,14 @@ A set of PowerShell functions for managing and working with the [Windows Termina
 ```powershell
 Install-Module WTToolBox
 ```
+
 Of course, it is assumed you have Windows Terminal installed or planned to. If Windows Terminal is not installed, you will get an warning message when you import this module.
 
 ## Module Commands
 
 * [Backup-WTSetting](docs/Backup-WTSetting.md)
 * [Get-WTKeyBinding](docs/Get-WTKeyBinding.md)
+* [Get-WTReleaseNote](docs/Get-WTReleaseNote.md)
 * [Get-WTProcess](docs/Get-WTProcess.md)
 * [Open-WTDefault](docs/Open-WTDefault.md)
 * [Test-WTVersion](docs/Test-WTVersion.md)
@@ -31,6 +33,14 @@ if ( $env:wt_session -AND Test-WTVersion) {
     Start-Process https://github.com/microsoft/terminal/releases
 }
 ```
+
+On a related note, you can also use `Get-WTReleaseNote` which will get the latest release information from the Windows Terminal GitHub repository. If you are running PowerShell 7 you can pipe the command to `Show-Markdown`.
+
+```powershell
+Get-WTReleaseNote | Show-Markdown -UseBrowser
+```
+
+The document will have links to any referenced issues.
 
 ## Global Variables
 
@@ -97,4 +107,4 @@ The method doesn't write anything to the pipeline.
 
 If you have any suggestions for enhancements or bug reports, please use the Issues section of this repository.
 
-Last updated 2020-05-05 14:27:45Z UTC
+Last updated 2020-05-06 16:09:42Z UTC
