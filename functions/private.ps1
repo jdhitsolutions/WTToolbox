@@ -37,7 +37,8 @@ Function AddWTSettingsVariable {
     Param()
 
     Write-Verbose "Parsing $global:WTSettingsPath"
-    $obj = (Get-Content -path $Global:WTSettingsPath).where({$_ -notmatch "//"}) | ConvertFrom-Json
+    #need to strip out comments for Windows PowerShell
+    $obj = (Get-Content -path $Global:WTSettingsPath).where({$_ -notmatch "(\/{2})(?=\s+)"}) | ConvertFrom-Json
 
     #only continue if there is an object
     if ($obj) {

@@ -1,5 +1,15 @@
 # Change Log for WTToolBox
 
+## 1.3.0
+
++ Modified code that generates `$WTSettings` and `WTDefaults` to not strip out icons and other content with // in the path.
++ Added `$WTDefaultsPath` variable.
++ Modified `Get-WTProcess` to write a custom object type to the pipeline.
++ Added `wtprocess.format.ps1xml` to format the current process process in green.
++ Added `Get-WTCurrent` command to display profile settings for the current PowerShell window.
++ Standardized verbose messages.
++ Updated `README.md`.
+
 ## 1.2.0
 
 + Added 'Get-WTReleaseNote`

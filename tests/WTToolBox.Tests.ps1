@@ -14,8 +14,8 @@ InModuleScope WTToolBox {
             {Test-ModuleManifest -Path "$PSScriptRoot\..\WTToolBox.psd1"} | Should Not Throw True
         }
 
-        It "Should export 6 commands" {
-            ( (Get-Module WTToolbox).ExportedCommands).count | Should Be 6
+        It "Should export 7 commands" {
+            ( (Get-Module WTToolbox).ExportedCommands).count | Should Be 7
         }
 
         $psdata = (Get-Module WTToolBox).PrivateData.psdata
@@ -240,23 +240,23 @@ return $fake
         Context Output {
 
             Mock Get-CimInstance {
-                  @{ParentProcessID=123}
+                  [pscustomobject]@{ParentProcessID=123}
             } -ParameterFilter {$Classname -eq "Win32_Process" -AND $filter -eq "ProcessID=$pid"}
 
             Mock Get-CimInstance {
-                 return  @(@{ProcessID = 300},@{ProcessID=200})
+                   @([pscustomobject]@{ProcessID = 300},[pscustomobject]@{ProcessID=200})
             } -ParameterFilter {$Classname -eq "Win32_Process" -AND $filter -eq "ParentProcessID = 123" -AND $Property -eq "ProcessID"}
 
             Mock Get-Process {
-                @{ProcessName = "WindowsTerminal"}
+                [pscustomobject]@{ProcessName = "WindowsTerminal"}
             } -ParameterFilter {$ID -eq 123}
 
             Mock Get-Process {
-                @{ProcessName = "powershell"}
+                [pscustomobject]@{ProcessName = "powershell"}
             } -ParameterFilter {$ID -eq 200}
 
             Mock Get-Process {
-                @{ProcessName = "pwsh"}
+                [pscustomobject]@{ProcessName = "pwsh"}
             } -ParameterFilter {$ID -eq 300}
 
             $r = Get-WTProcess
@@ -269,6 +269,10 @@ return $fake
             }
             It "Should write 3 objects to the pipeline" {
                 $r.count | Should be 3
+            }
+
+            It "Should write a custom object type of WTProcess" {
+                $r[0].psobject.typenames | Should contain "WTProcess"
             }
 
             It "Should write a warning if not running in Windows Terminal" {
@@ -423,4 +427,38 @@ return $fake
         }
 
     } #describe Get-WTReleaseNote
+
+    Describe 'Get-WTCurrent' {
+
+        Context Structure {
+
+            $thiscmd = Get-Item Function:Get-WTCurrent
+
+            It "Should use cmdletbinding" {
+                $thiscmd.CmdletBinding | Should Be True
+            }
+
+            It "Should have documentation" {
+                $h = Get-Help Get-WTCurrent
+                $h.description | Should Not Be Null
+                $h.examples | Should Not Be Null
+            }
+
+            It "Has no additional parameters" {
+                $thiscmd.parameters.keys.count | Should be 11
+            }
+        }
+
+        It "Should write a warning if there is no WT_PROFILE_ID variable" {
+            #save the current id if exists so it can be saved
+            $save = $env:WT_PROFILE_ID
+            $env:WT_PROFILE_ID = $null
+            Get-WTCurrent -WarningAction SilentlyContinue -WarningVariable w
+            $w | Should BeOfType [System.Management.Automation.WarningRecord]
+
+            $env:WT_PROFILE_ID = $save
+        }
+
+    } #describe Get-WTCurrent
+
 } #in module scope

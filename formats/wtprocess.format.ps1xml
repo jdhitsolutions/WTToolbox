@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+    <ViewDefinitions>
+        <View>
+            <Name>process</Name>
+            <ViewSelectedBy>
+                <TypeName>WTProcess</TypeName>
+            </ViewSelectedBy>
+            <TableControl>
+                <AutoSize/>
+                <TableHeaders>
+                    <TableColumnHeader>
+                        <Label>Handles</Label>
+                        <Width>7</Width>
+                        <Alignment>right</Alignment>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>NPM(K)</Label>
+                        <Width>7</Width>
+                        <Alignment>right</Alignment>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>PM(K)</Label>
+                        <Width>8</Width>
+                        <Alignment>right</Alignment>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>WS(K)</Label>
+                        <Width>10</Width>
+                        <Alignment>right</Alignment>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>VM(M)</Label>
+                        <Width>5</Width>
+                        <Alignment>right</Alignment>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>CPU(s)</Label>
+                        <Width>8</Width>
+                        <Alignment>right</Alignment>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>ID</Label>
+                        <Width>6</Width>
+                        <Alignment>right</Alignment>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>SI</Label>
+                        <Width>3</Width>
+                        <Alignment>right</Alignment>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>ProcessName</Label>
+                    </TableColumnHeader>
+                </TableHeaders>
+                <TableRowEntries>
+                    <TableRowEntry>
+                        <TableColumnItems>
+                            <TableColumnItem>
+                                <ScriptBlock>
+
+if ($_.id -eq $pid) {
+    "$([char]0x1b)[38;5;47m$($_.HandleCount)$([char]0x1b)[0m"
+}
+else {
+    $_.HandleCount
+}
+                                </ScriptBlock>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <ScriptBlock>
+                                $val = [long]($_.NPM / 1024)
+if ($_.id -eq $pid) {
+    "$([char]0x1b)[38;5;47m$($val)$([char]0x1b)[0m"
+}
+else {
+    $val
+    }
+                                </ScriptBlock>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <ScriptBlock>
+                                $val = [long]($_.PM / 1024)
+                               if ($_.id -eq $pid) {
+    "$([char]0x1b)[38;5;47m$($val)$([char]0x1b)[0m"
+}
+else {
+    $val
+    }
+                                </ScriptBlock>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <ScriptBlock>
+                                $val = [long]($_.WS / 1024)
+                                if ($_.id -eq $pid) {
+    "$([char]0x1b)[38;5;47m$($val)$([char]0x1b)[0m"
+}
+else {
+    $val
+    }
+                                </ScriptBlock>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <ScriptBlock> $val=[long]($_.VM / 1048576)
+                                if ($_.id -eq $pid) {
+    "$([char]0x1b)[38;5;47m$($val)$([char]0x1b)[0m"
+}
+else {
+    $val
+    }
+                                </ScriptBlock>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <ScriptBlock>
+if ($_.CPU -ne $())
+{
+    $val = $_.CPU.ToString("N")
+}
+ if ($_.id -eq $pid) {
+    "$([char]0x1b)[38;5;47m$($val)$([char]0x1b)[0m"
+}
+else {
+    $val
+    }
+                                </ScriptBlock>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <ScriptBlock>
+                                if ($_.id -eq $pid) {
+    "$([char]0x1b)[38;5;47m$($_.id)$([char]0x1b)[0m"
+}
+else {
+    $_.id
+    }
+
+                                </ScriptBlock>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <ScriptBlock>
+                                if ($_.id -eq $pid) {
+    "$([char]0x1b)[38;5;47m$($_.SI)$([char]0x1b)[0m"
+}
+else {
+    $_.SI
+    }
+                                </ScriptBlock>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <ScriptBlock>
+if ($_.id -eq $pid) {
+    "$([char]0x1b)[38;5;47m$($_.processname)$([char]0x1b)[0m"
+}
+else {
+    $_.processname
+}
+                                </ScriptBlock>
+                            </TableColumnItem>
+                        </TableColumnItems>
+                    </TableRowEntry>
+                </TableRowEntries>
+            </TableControl>
+        </View>
+    </ViewDefinitions>
+</Configuration>

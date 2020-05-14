@@ -182,6 +182,72 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Get-WTCurrent</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>WTCurrent</command:noun>
+      <maml:description>
+        <maml:para>Get Windows Terminal profile settings for the current session.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Use this command to display the Windows Terminal profile settings for the current PowerShell session. You cannot use this object to modify any settings. It is read-only.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-WTCurrent</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-WTCurrent
+
+acrylicOpacity             : 0.6
+commandline                : C:\Program Files\PowerShell\7\pwsh.exe -nologo
+guid                       : {993855ad-b0eb-4f3d-8370-1a8d5b53abb5}
+icon                       : %USERPROFILE%\OneDrive\windowsterminal\ProfileIcons\pwsh.scale-150.png
+name                       : PowerShell 7
+tabTitle                   : PS 7
+backgroundImage            : C:\Users\Jeff\OneDrive\terminalthumbs\Snover-head.png
+backgroundImageAlignment   : bottomRight
+backgroundImageStretchMode : none
+backgroundImageOpacity     : 0.75
+useAcrylic                 : True</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Get-WTKeyBinding</command:name>
       <command:verb>Get</command:verb>
       <command:noun>WTKeyBinding</command:noun>
@@ -270,7 +336,7 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Use this command to get all processes that are part of the current Windows Terminal application.</maml:para>
+      <maml:para>Use this command to get all processes that are part of the current Windows Terminal application. The command output is a regular System.Diagnostics.Process object. However, the default formatting will highlight the current PowerShell process in green text.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -291,7 +357,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>[System.Diagnostics.Process]</maml:name>
+          <maml:name>WTProcess</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -322,11 +388,16 @@ Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
     148      11     2236       8900       0.16  26764   1 OpenConsole
     116       7     1248       5620       0.03  15308   1 wsl</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>The current PowerShell process will be formatted in color.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks />
+    <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-Process</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
+    </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>

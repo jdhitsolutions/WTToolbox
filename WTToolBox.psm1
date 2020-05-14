@@ -25,7 +25,8 @@ if ($IsWindows -OR $PSEdition -eq 'Desktop') {
         }
         Write-Verbose "Creating a global variable with defaults"
         $defaults = Join-Path -path $app.installlocation -ChildPath defaults.json
-        $global:WTDefaults = (Get-Content -path $defaults).where({$_ -notmatch "//"}) | ConvertFrom-Json
+        $global:WTDefaultsPath = $defaults
+        $global:WTDefaults = (Get-Content -path $defaults).where({$_ -notmatch "(\/{2})(?=\s+)"}) | ConvertFrom-Json
     }
     else {
         Write-Warning "Windows Terminal was not found on this system."

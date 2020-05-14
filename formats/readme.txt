@@ -1,1 +1,1 @@
-There are no format .ps1xml files at this time.
+These are the formatting files for custom objects in this module
