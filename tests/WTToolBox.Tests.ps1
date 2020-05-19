@@ -380,25 +380,31 @@ return $fake
                 $h.examples | Should Not Be Null
             }
 
-            It "Has a single parameter of AsMarkdown" {
+            It "Has a parameter called AsMarkdown" {
                 $thiscmd.parameters.keys -contains "AsMarkdown" | Should be True
             }
 
             It "The AsMarkdown parameter has an alias of md" {
                 $thiscmd.parameters["AsMarkdown"].Aliases -contains "md" | Should Be True
             }
+
+            It "Has a parameter called Online" {
+                $thiscmd.parameters.keys -contains "Online" | Should be True
+            }
         }
 
         Context Output {
             Mock Invoke-RestMethod {
                 [pscustomobject]@{
-                    prerelease = "True"
+                    prerelease = "False"
                     name = "Windows Terminal"
                     published_at = "2020-05-05T22:25:47Z"
                     tag_name = "v0.11.0"
+                    html_url = "http://localhost"
                     body = "foo"
                 }
             }
+            Mock Start-Process {}
 
             $r = Get-WTReleaseNote
 
@@ -410,7 +416,7 @@ return $fake
                 $r.name | Should be "Windows Terminal"
                 $r.Version | Should be "v0.11.0"
                 $r.Notes | Should be "foo"
-                $r.prerelease | should be "true"
+                $r.prerelease | should be "false"
                 $r.prerelease | Should BeOfType "boolean"
                 $r.published | Should  BeOfType "DateTime"
             }
@@ -420,6 +426,10 @@ return $fake
                 $md | Should BeofType "string"
             }
 
+            It "Should call Start-Process to open an online link" {
+                Get-WTReleaseNote -online
+                Assert-MockCalled "Start-Process" -times 1
+            }
             It "Should throw an exception if GitHub can't be reached" {
                 Mock Invoke-RestMethod {}
                 {Get-WTReleaseNote} | Should Throw

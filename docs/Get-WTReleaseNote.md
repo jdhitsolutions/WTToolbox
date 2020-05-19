@@ -14,12 +14,12 @@ Get the latest Windows Terminal release information from GitHub
 ## SYNTAX
 
 ```yaml
-Get-WTReleaseNote [-AsMarkdown] [<CommonParameters>]
+Get-WTReleaseNote [-AsMarkdown] [-Online] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-This command will query the Windows Terminal GitHub repository to get information about the latest release.
+This command will query the Windows Terminal GitHub repository to get information about the latest release. You can also open the release notes directly on Github using the -Online parameter. This parameter will take precedence.
 
 ## EXAMPLES
 
@@ -28,22 +28,23 @@ This command will query the Windows Terminal GitHub repository to get informatio
 ```powershell
 PS C:\> PS C:\> Get-WTReleaseNote
 
-Name       : Windows Terminal Release Candidate v0.11.1251.0 (1.0rc1)
-Version    : v0.11.1251.0
-Published  : 5/5/2020 10:25:47 PM
+
+Name       : Windows Terminal v1.0.1401.0
+Version    : v1.0.1401.0
+Published  : 5/19/2020 4:08:09 PM
 Prerelease : False
 Notes      : ## Changes
 
-             This is the first release of Terminal whose name doesn't have "(Preview)" in it!
-             That doesn't necessarily mean we're done, but it does mean that this is the first release candidate.
+             * Windows Terminal now ships with [Cascadia Code 2005.15](https://github.com/microsoft/cascadia-code/releases/tag/v2005.15).
+             * All emoji are now sized as recommended by Unicode 13.0. You _will_ see some emoji that are smaller than you want them to be. That's just a fact of life. (#5934)
+             * Documentation for Windows Terminal has moved to [docs.microsoft.com](http://docs.microsoft.com/windows/terminal)!
+                * Existing user documentation in this repository will be moving to a nice farm upstate in short order.
 
-             ### Rendering (Performance!)
+             It will not escape your notice that there are two packages in this release:
+             * `WindowsTerminal` is the stable build of Terminal.
+             * `WindowsTerminalPreview` is the preview version, which can be installed _side-by-side_ with the stable version.
 
-             * Terminal no longer renders the entire screen when something changes (#5345) (#5185) (#5092)
-...
 ```
-
-The default output is a custom object.
 
 ### Example 2
 
@@ -52,6 +53,14 @@ PS C:\> Get-WTReleaseNote -AsMarkdown | Show-Markdown
 ```
 
 In PowerShell 7 you can render the release note as a markdown document and display it as markdown in the console. Or use the -UseBrowser parameter with Show-Markdown to open the in a web browser. Referenced GitHub issues should have links to the original issue.
+
+### Example 3
+
+```powershell
+PS C:\> Get-WTReleaseNote -online
+```
+
+Open the release notes page from GitHub in your default web browser.
 
 ## PARAMETERS
 
@@ -63,6 +72,22 @@ Create a markdown document. Referenced GitHub issues should have links to the or
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: md
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Online
+
+Open the online release notes. This parameter will take precedence.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
 
 Required: False
 Position: Named

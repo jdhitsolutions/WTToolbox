@@ -5,7 +5,8 @@ Function Get-WTReleaseNote {
     Param(
         [Parameter(HelpMessage = "Create a markdown document")]
         [alias("md")]
-        [switch]$AsMarkdown
+        [switch]$AsMarkdown,
+        [switch]$Online
     )
 
     Write-Verbose "[$((Get-Date).TimeofDay)] Starting $($myinvocation.mycommand)"
@@ -16,15 +17,18 @@ Function Get-WTReleaseNote {
         Write-Verbose "[$((Get-Date).TimeofDay)] Getting information from $uri"
         $get = Invoke-Restmethod -uri $uri -Method Get -ErrorAction stop
 
-        #TODO Once Windows Terminal is released this will need to be modified to get non-preview data
         Write-Verbose "[$((Get-Date).TimeofDay)] getting pre-release information"
-        $data = $get | Where-Object {$_.prerelease -eq "true"} | Select-Object -first 1
+        $data = $get | Where-Object {$_.prerelease -ne "true"} | Select-Object -first 1
 
         $data | Select-Object -Property Name,tag_name,published_at,prerelease,
 
         @{Name="bodyLength";Expression = {$_.body.length}} | Out-String | Write-Verbose
 
-        if ($AsMarkdown) {
+        if ($online) {
+            Write-Verbose "[$((Get-Date).TimeofDay)] Opening $($data.html_url) in your web browser."
+            Start-Process $data.html_url
+        }
+        elseif ($AsMarkdown) {
             [regex]$rx = "(?<=\()#\d+(?=\))"
             Write-Verbose "[$((Get-Date).TimeofDay)] Adding links to issues in the body"
             $issues = $rx.Matches($data.body)

@@ -1,5 +1,11 @@
 # Change Log for WTToolBox
 
+## 1.4.0
+
++ Modified `Get-WTReleaseNote` to release objecgts, not pre-release.
++ Update `Get-WTReleaseNote` to include an `-Online` parameter to open the release notes in GitHub.
++ Updated Pester tests.
+
 ## 1.3.0
 
 + Modified code that generates `$WTSettings` and `WTDefaults` to not strip out icons and other content with // in the path.
