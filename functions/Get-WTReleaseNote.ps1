@@ -17,7 +17,7 @@ Function Get-WTReleaseNote {
         Write-Verbose "[$((Get-Date).TimeofDay)] Getting information from $uri"
         $get = Invoke-Restmethod -uri $uri -Method Get -ErrorAction stop
 
-        Write-Verbose "[$((Get-Date).TimeofDay)] getting pre-release information"
+        Write-Verbose "[$((Get-Date).TimeofDay)] Getting release information"
         $data = $get | Where-Object {$_.prerelease -ne "true"} | Select-Object -first 1
 
         $data | Select-Object -Property Name,tag_name,published_at,prerelease,
@@ -26,7 +26,12 @@ Function Get-WTReleaseNote {
 
         if ($online) {
             Write-Verbose "[$((Get-Date).TimeofDay)] Opening $($data.html_url) in your web browser."
-            Start-Process $data.html_url
+            Try {
+                Start-Process $data.html_url -ErrorAction Stop
+            }
+            Catch {
+                Throw $_
+            }
         }
         elseif ($AsMarkdown) {
             [regex]$rx = "(?<=\()#\d+(?=\))"

@@ -15,7 +15,7 @@ InModuleScope WTToolBox {
         }
 
         It "Should export 7 commands" {
-            ( (Get-Module WTToolbox).ExportedCommands).count | Should Be 7
+            ( (Get-Module WTToolbox).ExportedCommands).count | Should Be 9
         }
 
         $psdata = (Get-Module WTToolBox).PrivateData.psdata
@@ -45,6 +45,30 @@ InModuleScope WTToolBox {
         }
     } #Describe ModuleStructure
 
+    Describe Install-WTRelease {
+
+        Context Structure {
+            $thiscmd = Get-Item -path Function:Install-WTRelease
+
+            It "Should use cmdletbinding" {
+                $thiscmd.CmdletBinding | Should Be True
+            }
+
+            It "Should support -WhatIf" {
+                $thiscmd.Parameters["WhatIf"].SwitchParameter | Should Be True
+            }
+
+            It "Should have a -Preview parameter" {
+                $thiscmd.Parameters["Preview"].SwitchParameter | Should Be True
+            }
+
+            It "Should have documentation" {
+                $h = Get-Help Install-WTRelease
+                $h.description | Should Not Be Null
+                $h.examples | Should Not Be Null
+            }
+        } #context structure
+    }
     Describe Backup-WTSetting {
 
             Mock Test-Path {$True}
@@ -82,43 +106,43 @@ InModuleScope WTToolBox {
 
         Context Input {
 
-            #create a sample backup file
-             $foo = New-Item TestDrive:\settings.bak1.json
-             $foo.LastWriteTime = [datetime]"5/1/2020 12:00PM"
 
-            It "should accept a destination value" {
-                {Backup-WTSetting -Destination TESTDRIVE:\} | Should Not Throw
-            }
-            It "Should run Test-Path" {
-                Assert-MockCalled "Test-Path" -Scope Context
-            }
-            It "Should run Get-Childitem" {
-                Assert-MockCalled "Get-ChildItem" -Scope Context
-            }
-            It "Should run Copy-Item" {
-                Assert-MockCalled "Copy-Item" -Times 2 -Scope Context
-            }
-
-            It "Should run Remove-Item" {
-                Assert-MockCalled "Remove-Item" -Times 1 -Scope Context
-            }
         } #context input
 
         Context Output {
 
-             #create a sample backup file
-             $foo = New-Item TestDrive:\settings.bak1.json
-             $foo.LastWriteTime = [datetime]"5/1/2020 12:00PM"
-
-            It "Should write a file object to the pipeline with -Passthru" {
-                $r = Backup-WTSetting -Destination TESTDRIVE:\ -passthru
-                #$r | out-string | write-host
-                $r.count | should be 1
-                $r[0] | Should BeOfType system.io.fileinfo
-            }
         } #context output
+
     } #Describe Backup-WTSetting
 
+    Describe Get-WTCurrentRelease {
+
+        Context Structure {
+            $thiscmd = Get-Item -path Function:\Get-WTCurrentRelease
+
+            It "Should use cmdletbinding" {
+                $thiscmd.CmdletBinding | Should Be True
+            }
+
+            It "Should support -WhatIf" {
+                $thiscmd.Parameters["WhatIf"].SwitchParameter | Should Be True
+            }
+
+            It "Should have a -Preview parameter" {
+                $thiscmd.Parameters["Preview"].SwitchParameter | Should Be True
+            }
+
+            It "Should have documentation" {
+                $h = Get-Help Get-WTCurrentRelease
+                $h.description | Should Not Be Null
+                $h.examples | Should Not Be Null
+            }
+
+        } #context structure
+        Context Input {}
+
+        Context Output {}
+    }
     Describe Get-WTKeyBinding {
 
         Context Structure {

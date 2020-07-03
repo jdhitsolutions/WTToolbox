@@ -23,6 +23,16 @@ Of course, it is assumed you have `Windows Terminal` installed or planned to. If
 * [Get-WTCurrent](docs/Get-WTCurrent.md)
 * [Open-WTDefault](docs/Open-WTDefault.md)
 * [Test-WTVersion](docs/Test-WTVersion.md)
+* [Get-WTCurrentRelease](docs/Get-WTCurrentRelease.md)
+* [Install-WTRelease](docs/Install-WTRelease.md)
+
+### Installing Windows Terminal
+
+You can install the latest stable or preview release of Windows Terminal using the packages available on GitHub.
+
+```powershell
+Install-WTRelease [-preview]
+```
 
 ### Displaying Key Bindings
 
@@ -58,6 +68,17 @@ Get-WTReleaseNote | Show-Markdown -UseBrowser
 ```
 
 The document will have links to any referenced issues.
+
+You can also use [Get-WTCurrentRelease](docs/Get-WTCurrentRelease.md) to get a quick peek at the latest online version and your locally installed version.
+
+```powershell
+PS C:\> Get-WTCurrentRelease
+
+
+Name                         Version     Released             LocalVersion
+----                         -------     --------             ------------
+Windows Terminal v1.0.1811.0 v1.0.1811.0 6/30/2020 6:59:57 PM 1.0.1811.0
+```
 
 ### Windows Terminal Processes
 
@@ -134,4 +155,4 @@ The method doesn't write anything to the pipeline.
 
 If you have any suggestions for enhancements or bug reports, please use the Issues section of this repository.
 
-> *Last updated 2020-05-19 17:07:45Z UTC*
+> *Last updated 2020-07-03 15:33:12Z UTC*

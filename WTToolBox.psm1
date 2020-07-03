@@ -29,7 +29,7 @@ if ($IsWindows -OR $PSEdition -eq 'Desktop') {
         $global:WTDefaults = (Get-Content -path $defaults).where({$_ -notmatch "(\/{2})(?=\s+)"}) | ConvertFrom-Json
     }
     else {
-        Write-Warning "Windows Terminal was not found on this system."
+        Write-Warning "Windows Terminal was not found on this system so not all commands in this module will work."
     }
 }
 else {

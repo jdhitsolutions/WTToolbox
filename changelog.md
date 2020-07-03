@@ -1,8 +1,16 @@
 # Change Log for WTToolBox
 
+## 1.5.0
+
++ Added `Install-WTRelease` (Issue #4)
++ Added `Get-WTCurrentRelease` (Issue #3)
++ Updated warning on module import.
++ Updated `README.md`
++ Help updates
+
 ## 1.4.0
 
-+ Modified `Get-WTReleaseNote` to release objecgts, not pre-release.
++ Modified `Get-WTReleaseNote` to release objects, not pre-release.
 + Update `Get-WTReleaseNote` to include an `-Online` parameter to open the release notes in GitHub.
 + Updated Pester tests.
 

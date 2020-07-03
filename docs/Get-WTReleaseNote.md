@@ -26,7 +26,7 @@ This command will query the Windows Terminal GitHub repository to get informatio
 ### Example 1
 
 ```powershell
-PS C:\> PS C:\> Get-WTReleaseNote
+PS C:\> Get-WTReleaseNote
 
 
 Name       : Windows Terminal v1.0.1401.0
@@ -43,7 +43,6 @@ Notes      : ## Changes
              It will not escape your notice that there are two packages in this release:
              * `WindowsTerminal` is the stable build of Terminal.
              * `WindowsTerminalPreview` is the preview version, which can be installed _side-by-side_ with the stable version.
-
 ```
 
 ### Example 2
@@ -52,7 +51,9 @@ Notes      : ## Changes
 PS C:\> Get-WTReleaseNote -AsMarkdown | Show-Markdown
 ```
 
-In PowerShell 7 you can render the release note as a markdown document and display it as markdown in the console. Or use the -UseBrowser parameter with Show-Markdown to open the in a web browser. Referenced GitHub issues should have links to the original issue.
+In PowerShell 7 you can render the release note as a markdown document and display it as markdown in the console.
+Or use the -UseBrowser parameter with Show-Markdown to open the in a web browser.
+Referenced GitHub issues should have links to the original issue.
 
 ### Example 3
 
@@ -75,7 +76,7 @@ Aliases: md
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -91,7 +92,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
