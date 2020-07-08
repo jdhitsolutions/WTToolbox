@@ -1,1 +1,1 @@
-These are the formatting files for custom objects in this module
+These are the formatting files for custom objects in this module.

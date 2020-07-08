@@ -11,7 +11,15 @@ Function Get-WTCurrent {
 
             #refresh the settings object to get current values
             $wtsettings.refresh()
-            $profile = $wtsettings.profiles.list.where({$_.guid -eq $env:WT_PROFILE_ID})
+
+            #Test if user is using the newer List entry in the json file
+            #or is using a settings file based on defaults.json
+            if ($wtsettings.profiles.list.guid) {
+                $profile = $wtsettings.profiles.list.where({$_.guid -eq $env:WT_PROFILE_ID})
+            }
+            elseif ($wtsettings.profiles.guid) {
+                $profile = $wtsettings.profiles.where( {$_.guid -eq $env:WT_PROFILE_ID})
+            }
             if ($profile) {
                 $profile
             }

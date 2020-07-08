@@ -62,7 +62,7 @@ InModuleScope WTToolBox {
                 $thiscmd.Parameters["Preview"].SwitchParameter | Should Be True
             }
 
-            It "Should have documentation" {
+            It "Should have help documentation" {
                 $h = Get-Help Install-WTRelease
                 $h.description | Should Not Be Null
                 $h.examples | Should Not Be Null
@@ -92,7 +92,7 @@ InModuleScope WTToolBox {
                 $thiscmd.Parameters["WhatIf"].SwitchParameter | Should Be True
             }
 
-            It "Should have documentation" {
+            It "Should have help documentation" {
                 $h = Get-Help Backup-WTSetting
                 $h.description | Should Not Be Null
                 $h.examples | Should Not Be Null
@@ -124,15 +124,11 @@ InModuleScope WTToolBox {
                 $thiscmd.CmdletBinding | Should Be True
             }
 
-            It "Should support -WhatIf" {
-                $thiscmd.Parameters["WhatIf"].SwitchParameter | Should Be True
-            }
-
             It "Should have a -Preview parameter" {
                 $thiscmd.Parameters["Preview"].SwitchParameter | Should Be True
             }
 
-            It "Should have documentation" {
+            It "Should have help documentation" {
                 $h = Get-Help Get-WTCurrentRelease
                 $h.description | Should Not Be Null
                 $h.examples | Should Not Be Null
@@ -152,7 +148,7 @@ InModuleScope WTToolBox {
                 $thiscmd.CmdletBinding | should Be True
             }
 
-            It "Should have documentation" {
+            It "Should have help documentation" {
                 $h = Get-Help Get-WTKeyBinding
                 $h.description | Should Not Be Null
                 $h.examples | Should Not Be Null
@@ -254,7 +250,7 @@ return $fake
                 $thiscmd.CmdletBinding | should Be True
             }
 
-            It "Should have documentation" {
+            It "Should have help documentation" {
                 $h = Get-Help Get-WTProcess
                 $h.description | Should Not Be Null
                 $h.examples | Should Not Be Null
@@ -318,7 +314,7 @@ return $fake
                 $thiscmd.CmdletBinding | should Be True
             }
 
-            It "Should have documentation" {
+            It "Should have help documentation" {
                 $h = Get-Help Open-WTDefault
                 $h.description | Should Not Be Null
                 $h.examples | Should Not Be Null
@@ -356,7 +352,7 @@ return $fake
                 $thiscmd.CmdletBinding | should Be True
             }
 
-            It "Should have documentation" {
+            It "Should have help documentation" {
                 $h = Get-Help Test-WTVersion
                 $h.description | Should Not Be Null
                 $h.examples | Should Not Be Null
@@ -398,7 +394,7 @@ return $fake
                 $thiscmd.CmdletBinding | Should Be True
             }
 
-            It "Should have documentation" {
+            It "Should have help documentation" {
                 $h = Get-Help Test-WTVersion
                 $h.description | Should Not Be Null
                 $h.examples | Should Not Be Null
@@ -472,7 +468,7 @@ return $fake
                 $thiscmd.CmdletBinding | Should Be True
             }
 
-            It "Should have documentation" {
+            It "Should have help documentation" {
                 $h = Get-Help Get-WTCurrent
                 $h.description | Should Not Be Null
                 $h.examples | Should Not Be Null

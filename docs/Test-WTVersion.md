@@ -1,7 +1,7 @@
 ---
 external help file: WTToolBox-help.xml
 Module Name: WTToolBox
-online version:
+online version: https://bit.ly/38Fh1s5
 schema: 2.0.0
 ---
 
@@ -60,7 +60,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-
 Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
 
 ## RELATED LINKS
+
+[Get-WTCurrentRelease]()

@@ -1,5 +1,14 @@
 # Change Log for WTToolBox
 
+## 1.6.0
+
++ Modified by `Get-WTCurrent` to work when settings file is based on defaults. (Issue #2)
++ Modified the regex pattern used to filter out comments to not require a space after //.
++ Added online links to help documentation.
++ Fixed typo in `AddWTSettingsVariable` that was preventing LastUpdated and LastRefresh properties from being defined.
++ Fixed typo in `Backup-WTSetting` that was not sorting backup files properly.
++ Updated `README.md`
+
 ## 1.5.0
 
 + Added `Install-WTRelease` (Issue #4)

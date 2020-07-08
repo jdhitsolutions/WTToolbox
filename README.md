@@ -149,10 +149,10 @@ PS C:\> $WTSettings.refresh()
 
 The method doesn't write anything to the pipeline.
 
-> A quick note on the settings and defaults objects. The JSON standard does not recognize comments, yet they are used in `Windows Terminal`. You can see them with leading // characters. In order to convert the JSON to objects, these comments must be stripped out of the content. This is done with a regular expression. PowerShell 7 is more forgiving if it detects comments. Windows PowerShell will refuse to to convert the content from JSON. It is recommended that if you are using comments that you insert a space after the leading slashes like this: `// this is a comment`.
+> A quick note on the settings and defaults objects. The JSON standard does not recognize comments, yet they are used in `Windows Terminal` settings files. You can see them with leading // characters. In order to convert the JSON to objects, these comments must be stripped out of the content. This is done with a regular expression. PowerShell 7 is more forgiving if it detects comments. Windows PowerShell will refuse to to convert the content from JSON. Although the module has been updated to better handle comments, tt is recommended that if you are using comments, that you insert a space after the leading slashes like this: `// this is a comment`.
 
 ## Future Versions
 
 If you have any suggestions for enhancements or bug reports, please use the Issues section of this repository.
 
-> *Last updated 2020-07-03 15:33:12Z UTC*
+> *Last updated 2020-07-08 14:31:26Z UTC*

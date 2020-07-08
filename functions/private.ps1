@@ -38,14 +38,16 @@ Function AddWTSettingsVariable {
 
     Write-Verbose "Parsing $global:WTSettingsPath"
     #need to strip out comments for Windows PowerShell
-    $obj = (Get-Content -path $Global:WTSettingsPath).where({$_ -notmatch "(\/{2})(?=\s+)"}) | ConvertFrom-Json
+    #$pattern = "(?(?<=:|\/)no)(\/{2})(?=\s+)?"
+     $pattern ="(\/{2})(?=\s+)?"
+    $obj = (Get-Content -path $Global:WTSettingsPath).where({$_ -notmatch $pattern -OR $_ -match "ms-appx:\/{3}"}) | ConvertFrom-Json
 
     #only continue if there is an object
     if ($obj) {
         Write-Verbose "Adding custom properties"
         Add-Member -inputObject $obj -MemberType NoteProperty -Name Computername -Value $env:COMPUTERNAME
-        Add-Member -inputObject $obj-MemberType NoteProperty -Name LastUpdated -Value ((Get-Item -path $Global:WTSettingsPath).LastWriteTime)
-        Add-Member -inputObject $obj-MemberType NoteProperty -Name LastRefresh -Value (Get-Date)
+        Add-Member -inputObject $obj -MemberType NoteProperty -Name LastUpdated -Value ((Get-Item -path $Global:WTSettingsPath).LastWriteTime)
+        Add-Member -inputObject $obj -MemberType NoteProperty -Name LastRefresh -Value (Get-Date)
 
         Write-Verbose "Adding a method to refresh the object"
         Add-Member -inputObject $obj -MemberType ScriptMethod -Name Refresh -Value { AddWTSettingsVariable  }

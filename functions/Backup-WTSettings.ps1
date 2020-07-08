@@ -6,6 +6,7 @@ Function Backup-WTSetting {
     [CmdletBinding(SupportsShouldProcess)]
     Param(
         #how many backup copies should be saved
+        [ValidateScript({$_ -ge 1})]
         [int]$Limit = 7,
         #backup folder
         [parameter(Mandatory, HelpMessage = "Specify the backup location. It must already exist.")]
@@ -15,14 +16,16 @@ Function Backup-WTSetting {
     )
 
     Write-Verbose "[$((Get-Date).TimeofDay)] Starting $($myinvocation.MyCommand)"
-    $json = "$ENV:Userprofile\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+    #use the variable defined in the module
+    $json = $global:WTSettingsPath
+    #"$ENV:Userprofile\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 
     if (Test-Path $json) {
 
         Write-Verbose "[$((Get-Date).TimeofDay)] Backing up $json to $Destination"
         Write-Verbose "[$((Get-Date).TimeofDay)] Get existing backups from $Destination and saving as an array sorted by name"
 
-        [array]$bak = Get-ChildItem -path $Destination\settings.bak*.json | Sort-Object -Property LastWriteTimeString
+        [array]$bak = Get-ChildItem -path $Destination\settings.bak*.json | Sort-Object -Property LastWriteTime
 
         if ($bak.count -eq 0) {
             Write-Verbose "[$((Get-Date).TimeofDay)] Creating first backup copy."

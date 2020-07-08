@@ -1,7 +1,7 @@
 ---
 external help file: WTToolBox-help.xml
 Module Name: WTToolBox
-online version:
+online version: https://bit.ly/2ZcqNPE
 schema: 2.0.0
 ---
 
@@ -19,7 +19,7 @@ Open-WTDefault [<CommonParameters>]
 
 ## DESCRIPTION
 
-Windows Terminal uses a default.json file for default settings that can be overwritten with your settings.json file. This command will open the defaults.json file using the application associated with json files. 
+Windows Terminal uses a default.json file for default settings that can be overwritten with your settings.json file. This command will open the defaults.json file using the application associated with json files.
 
 ## EXAMPLES
 

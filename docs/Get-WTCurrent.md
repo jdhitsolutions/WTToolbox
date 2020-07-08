@@ -1,7 +1,7 @@
 ---
 external help file: WTToolBox-help.xml
 Module Name: WTToolBox
-online version:
+online version: https://bit.ly/3ec5a6e
 schema: 2.0.0
 ---
 
