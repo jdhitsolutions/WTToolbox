@@ -3,7 +3,7 @@
 ## 1.7.0
 
 + Fixed bug in `Install-WTToolbox` that was breaking the installation.
-
++ Minor grammar corrections to the `README.md`.
 
 ## 1.6.0
 
