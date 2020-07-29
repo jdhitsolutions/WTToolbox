@@ -1,5 +1,10 @@
 # Change Log for WTToolBox
 
+## 1.7.0
+
++ Fixed bug in `Install-WTToolbox` that was breaking the installation.
+
+
 ## 1.6.0
 
 + Modified by `Get-WTCurrent` to work when settings file is based on defaults. (Issue #2)

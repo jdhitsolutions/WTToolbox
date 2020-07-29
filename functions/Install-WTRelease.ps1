@@ -26,9 +26,11 @@ Function Install-WTRelease {
                 $data = $get | Where-Object {$_.prerelease -ne "true"} | Select-Object -first 1
             }
             #download
-            Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Downloading $($data.assets.name)"
-            $src = $data.assets.browser_download_url
-            $target = Join-Path -Path $env:temp -ChildPath $data.assets.name
+            $msix = ($data.assets.name).where({$_ -match "\.msixbundle"})
+
+            Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Downloading $msix"
+            $src = $data.assets[0].browser_download_url
+            $target = Join-Path -Path $env:temp -ChildPath $msix.trim()
             if ($pscmdlet.shouldProcess($src, "Download and install")) {
                 Invoke-WebRequest -uri $src -outfile $target -disableKeepAlive -useBasicParsing -erroraction Stop
                 Add-AppxPackage -Path $target -ErrorAction stop

@@ -61,7 +61,7 @@ if ( $env:wt_session -AND Test-WTVersion) {
 }
 ```
 
-On a related note, you can also use `Get-WTReleaseNote` which will get the latest release information from the `Windows Terminal` GitHub repository. If you are running PowerShell 7 you can pipe the command to `Show-Markdown`.
+On a related note, you can also use `Get-WTReleaseNote` which will get the latest release information from the `Windows Terminal` GitHub repository. If you are running PowerShell 7.x, you can pipe the command to `Show-Markdown`.
 
 ```powershell
 Get-WTReleaseNote | Show-Markdown -UseBrowser
@@ -82,17 +82,17 @@ Windows Terminal v1.0.1811.0 v1.0.1811.0 6/30/2020 6:59:57 PM 1.0.1811.0
 
 ### Windows Terminal Processes
 
-The `Get-WTProcess` command will get all processes associated with the current Windows Terminal process. The output is a normal `System.Diagnostics.Process` object but the default formatting has been customized to highlight the current PowerShell process.
+The `Get-WTProcess` command will get all processes associated with the current Windows Terminal process. The output is a normal `System.Diagnostics.Process` object, but the default formatting has been customized to highlight the current PowerShell process.
 
 ![Get-WTProcess](assets/wtprocess-ansi.png)
 
 ## Global Variables
 
-To make it easier to see either default settings or your custom settings, when you import this module, it will define 3 global variables. Assuming of course that you have `Windows Terminal` installed and are using `settings.json`.
+To make it easier to see either default settings or your custom settings, when you import this module, it will define 3 global variables. Assuming, of course, that you have `Windows Terminal` installed and are using `settings.json`.
 
 ### WTSettingsPath
 
-The path to `settings.json` is buried in your AppData folder. You can use `$WTSettingsPath` as a placeholder. Yes, you can easily open the file from `Windows Terminal` but there may be other things you want to do with the path information.
+The path to `settings.json` is buried in your AppData folder. You can use `$WTSettingsPath` as a placeholder. Yes, you can easily open the file from `Windows Terminal`, but there may be other things you want to do with the path information.
 
 ### WTDefaults
 
@@ -110,7 +110,7 @@ When you import the module, it will also create a variable called `WTDefaultsPat
 
 ### WTSettings
 
-The last object is a customized version of the data in `settings.json`. This should make it easier to see your settings.
+The last object is a customized version of the data in `settings.json`. The object should make it easier to see your settings.
 
 ```powershell
 PS C:\> $wtsettings.profiles.list | where-object hidden
@@ -149,10 +149,10 @@ PS C:\> $WTSettings.refresh()
 
 The method doesn't write anything to the pipeline.
 
-> A quick note on the settings and defaults objects. The JSON standard does not recognize comments, yet they are used in `Windows Terminal` settings files. You can see them with leading // characters. In order to convert the JSON to objects, these comments must be stripped out of the content. This is done with a regular expression. PowerShell 7 is more forgiving if it detects comments. Windows PowerShell will refuse to to convert the content from JSON. Although the module has been updated to better handle comments, tt is recommended that if you are using comments, that you insert a space after the leading slashes like this: `// this is a comment`.
+> A quick note on the settings and defaults objects. The JSON standard does not recognize comments, yet they are used in `Windows Terminal` settings files. You can see them with leading // characters. In order to convert the JSON to objects, these comments must be stripped out of the content. This is done with a regular expression. PowerShell 7 is more forgiving if it detects comments. Windows PowerShell will refuse to convert the content from JSON. Although the module has been updated to better handle comments, tt is recommended that if you are using comments, that you insert a space after the leading slashes like this: `// this is a comment`.
 
 ## Future Versions
 
 If you have any suggestions for enhancements or bug reports, please use the Issues section of this repository.
 
-> *Last updated 2020-07-08 14:31:26Z UTC*
+> *Last updated 2020-07-29 19:10:05Z UTC*
