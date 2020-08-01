@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Get Windows Terminal processes
+Get Windows Terminal processes.
 
 ## SYNTAX
 
@@ -19,7 +19,7 @@ Get-WTProcess [<CommonParameters>]
 
 ## DESCRIPTION
 
-Use this command to get all processes that are part of the current Windows Terminal application. The command output is a regular System.Diagnostics.Process object. However, the default formatting will highlight the current PowerShell process in green text.
+Use this command to get all processes that are part of the current Windows Terminal application. The command output is a regular System.Diagnostics.Process object. However, the default formatting will highlight the your PowerShell process in green text.
 
 ## EXAMPLES
 

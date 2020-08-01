@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Test if newer version of Windows Terminal is installed.
+Test if an updated version of Windows Terminal is installed.
 
 ## SYNTAX
 
@@ -19,7 +19,7 @@ Test-WTVersion [<CommonParameters>]
 
 ## DESCRIPTION
 
-Because Windows Terminal can update in the background, you may not be aware that you are running a newer version. A newer version might offer new features to enable in your settings file or things that you have to change. This command will compare the currently installed version with saved information from the last time the command was run. If the version is newer, this command returns True. The command writes a small json file to $Home.
+Because Windows Terminal can update in the background, you may not be aware that you are running a newer version. An updated version might offer new features to enable in your settings file or things that you have to change. This command will compare the currently installed version with saved information from the last time the command was run. If the Windows Terminal version is newer, this command returns True. This function writes a small json file to $Home.
 
 ## EXAMPLES
 
@@ -42,7 +42,7 @@ PS C:\> if ( $env:wt_session -AND Test-WTVersion) {
 }
 ```
 
-Because Windows Terminal can silently update, it may be difficult to know if you are running a new version. You might use the `Test-WTVersion` command in your PowerShell profile script with this code snippet.
+Because Windows Terminal can silently update, it may be awkward to know if you are running a new version. You might use the `Test-WTVersion` command in your PowerShell profile script with this code snippet.
 
 ## PARAMETERS
 
@@ -64,4 +64,4 @@ Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell
 
 ## RELATED LINKS
 
-[Get-WTCurrentRelease]()
+[Get-WTCurrentRelease](Get-WTCurrentRelease)

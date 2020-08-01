@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Get the current Windows Terminal release
+Get the current Windows Terminal release.
 
 ## SYNTAX
 
@@ -19,7 +19,7 @@ Get-WTCurrentRelease [-Preview] [<CommonParameters>]
 
 ## DESCRIPTION
 
-This command will give you a summary of the latest Windows Terminal release including locally installed versions. Use the -Preview parameter to check for the latest preview.
+This command will give you a summary of the latest Windows Terminal release, including locally installed versions. Use the -Preview parameter to check for the latest preview.
 
 ## EXAMPLES
 
@@ -69,4 +69,4 @@ Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell
 
 ## RELATED LINKS
 
-[Test-WTVersion]()
+[Test-WTVersion](Test-WTVersion.md)

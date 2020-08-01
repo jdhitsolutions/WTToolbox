@@ -106,7 +106,6 @@ InModuleScope WTToolBox {
 
         Context Input {
 
-
         } #context input
 
         Context Output {
@@ -166,7 +165,8 @@ InModuleScope WTToolBox {
             }
         } #context input
         Context Output {
-
+            $global:wtSettingsPath = "Testdrive:\settings.json"
+            Mock Get-WTProcess {}
             mock parsesetting {
                @{
                 Action = "closeWindow"
@@ -192,7 +192,7 @@ InModuleScope WTToolBox {
 return $fake
             } -ParameterFilter {$Path -eq "Testdrive:\defaults.json" }
 
-            Mock Get-Content { } -ParameterFilter {$Path -eq "$ENV:Userprofile\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"}
+            Mock Get-Content { } -ParameterFilter {$Path -eq "Testdrive:\settings.json"}
             Mock Get-Appxpackage {
                @{InstallLocation = "TestDrive:"}
             } -ParameterFilter {$Name -eq 'Microsoft.WindowsTerminal'}
@@ -200,8 +200,9 @@ return $fake
             Mock Join-Path {
                  "Testdrive:\defaults.json"
             } -ParameterFilter {$Path -eq "Testdrive:" -AND $childpath -eq "defaults.json" }
+            Mock Test-Path {$True}
 
-            $f = Get-WTKeybinding
+            $f = Get-WTKeybinding 
             It "Should call Get-AppxPackage" {
                 Assert-MockCalled "Get-AppxPackage" -Scope Context
             }
@@ -296,10 +297,13 @@ return $fake
             }
 
             It "Should write a warning if not running in Windows Terminal" {
-              Mock Get-CimInstance {} -ParameterFilter {$Classname -eq "Win32_Process" -AND $filter -eq "ProcessID=$PID"}
+
+                Mock Get-Process {
+                    [pscustomobject]@{ProcessName="Foo"}
+                } -ParameterFilter {$ID -eq 123}
 
                Get-WTProcess -WarningAction SilentlyContinue -WarningVariable w
-               $w | Should be "This instance of PowerShell doesn't appear to be running in Windows Terminal."
+               $w | Should match "\w+"
             }
         } #context output
 
@@ -323,19 +327,23 @@ return $fake
 
         Context Output {
 
+            Mock Get-WTProcess {}
             It "Should throw an exception if Windows Terminal is not installed" {
-                Mock Get-AppxPackage {}
                 {Open-WTDefault} | Should Throw
             }
             It "Should write a warning if default.json is missing" {
-                Mock Get-AppxPackage {
-                    @{InstallLocation = "Testdrive:\"}
+                Mock Get-WTProcess {
+                    [pscustomobject]@{Name="WindowsTerminal";Path = "TestDrive:\windowsTerminal"}
                 }
-                Mock Test-Path {$False} -ParameterFilter {$Path -eq "Testdrive:\" -AND $ChildPath -eq 'defaults.json'}
+
+                Mock Test-Path {$False}
                 Open-WTDefault -WarningAction SilentlyContinue -WarningVariable w
-                $w | Should be "Could not find default.json file."
+                $w | Should match "\w+"
             }
             It "Should open the file with Invoke-Item" {
+                Mock Get-WTProcess {
+                    [pscustomobject]@{Name = "WindowsTerminal"; Path = "TestDrive:\windowsTerminal"}
+                }
                 Mock Test-Path {$True}
                 Mock Invoke-Item {}
                 {Open-WTDefault} | Should not Throw

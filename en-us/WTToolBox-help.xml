@@ -10,7 +10,7 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Use this command to create a backup copy of the settings.json file for Windows Terminal. Each backup will be numbered up to the the specified limit. The oldest file will be called settings.bak1.json with the number incrementing for each backup.</maml:para>
+      <maml:para>Use this command to create a backup copy of the settings.json file for Windows Terminal. Each backup will be numbered up to the  specified limit. The oldest file will be called settings.bak1.json with the number incrementing for each backup.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -262,11 +262,11 @@ useAcrylic                 : True</dev:code>
       <command:verb>Get</command:verb>
       <command:noun>WTCurrentRelease</command:noun>
       <maml:description>
-        <maml:para>Get the current Windows Terminal release</maml:para>
+        <maml:para>Get the current Windows Terminal release.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>This command will give you a summary of the latest Windows Terminal release including locally installed versions. Use the -Preview parameter to check for the latest preview.</maml:para>
+      <maml:para>This command will give you a summary of the latest Windows Terminal release, including locally installed versions. Use the -Preview parameter to check for the latest preview.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -353,11 +353,11 @@ Windows Terminal v1.0.1811.0 v1.0.1811.0 6/30/2020 6:59:57 PM 1.0.1811.0</dev:co
       <command:verb>Get</command:verb>
       <command:noun>WTKeyBinding</command:noun>
       <maml:description>
-        <maml:para>Display Windows Terminal key binding information</maml:para>
+        <maml:para>Display Windows Terminal key binding information.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Get Windows Terminal key binding settings and display with your choice of formats. If a keybinding from your settings.json file has the same keys as a default, the default is overwritten in the output.</maml:para>
+      <maml:para>Get Windows Terminal key binding settings and display with your choice of formats. If a keybinding from your settings.json file has the same key combination as a default, the default setting is overwritten.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -365,7 +365,7 @@ Windows Terminal v1.0.1811.0 v1.0.1811.0 6/30/2020 6:59:57 PM 1.0.1811.0</dev:co
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="out">
           <maml:name>Format</maml:name>
           <maml:Description>
-            <maml:para>Specify how to display the results. Possible values are:  Table,List,Grid, and None</maml:para>
+            <maml:para>Specify how to display the results. Possible values are: Table,List,Grid, and None.</maml:para>
             <maml:para>This parameter has an alias of 'out'.</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -381,7 +381,7 @@ Windows Terminal v1.0.1811.0 v1.0.1811.0 6/30/2020 6:59:57 PM 1.0.1811.0</dev:co
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="out">
         <maml:name>Format</maml:name>
         <maml:Description>
-          <maml:para>Specify how to display the results. Possible values are:  Table,List,Grid, and None</maml:para>
+          <maml:para>Specify how to display the results. Possible values are: Table,List,Grid, and None.</maml:para>
           <maml:para>This parameter has an alias of 'out'.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -419,9 +419,9 @@ Windows Terminal v1.0.1811.0 v1.0.1811.0 6/30/2020 6:59:57 PM 1.0.1811.0</dev:co
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>c:\scripts\Get-WTKeyBindings -format grid</dev:code>
+        <dev:code>PS C:\Get-WTKeyBinding -format grid</dev:code>
         <dev:remarks>
-          <maml:para>This is a PowerShell script so you need to specify the path to the file.</maml:para>
+          <maml:para>Get Windows Terminal key bindings and display in Out-Gridview.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -438,11 +438,11 @@ Windows Terminal v1.0.1811.0 v1.0.1811.0 6/30/2020 6:59:57 PM 1.0.1811.0</dev:co
       <command:verb>Get</command:verb>
       <command:noun>WTProcess</command:noun>
       <maml:description>
-        <maml:para>Get Windows Terminal processes</maml:para>
+        <maml:para>Get Windows Terminal processes.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Use this command to get all processes that are part of the current Windows Terminal application. The command output is a regular System.Diagnostics.Process object. However, the default formatting will highlight the current PowerShell process in green text.</maml:para>
+      <maml:para>Use this command to get all processes that are part of the current Windows Terminal application. The command output is a regular System.Diagnostics.Process object. However, the default formatting will highlight the your PowerShell process in green text.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -515,7 +515,7 @@ Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
       <command:verb>Get</command:verb>
       <command:noun>WTReleaseNote</command:noun>
       <maml:description>
-        <maml:para>Get the latest Windows Terminal release information from GitHub</maml:para>
+        <maml:para>Get the latest Windows Terminal release information from GitHub.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -546,6 +546,17 @@ Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>Preview</maml:name>
+          <maml:Description>
+            <maml:para>Get the latest preview release.</maml:para>
+          </maml:Description>
+          <dev:type>
+            <maml:name>SwitchParameter</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>False</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -565,6 +576,18 @@ Handles  NPM(K)    PM(K)      WS(K)     CPU(s)     Id  SI ProcessName
         <maml:name>Online</maml:name>
         <maml:Description>
           <maml:para>Open the online release notes. This parameter will take precedence.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>Preview</maml:name>
+        <maml:Description>
+          <maml:para>Get the latest preview release.</maml:para>
         </maml:Description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -633,9 +656,9 @@ Notes      : ## Changes
       </command:example>
       <command:example>
         <maml:title>-------------------------- Example 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-WTReleaseNote -AsMarkdown | Show-Markdown</dev:code>
+        <dev:code>PS C:\&gt; Get-WTReleaseNote -AsMarkdown -Preview | Show-Markdown</dev:code>
         <dev:remarks>
-          <maml:para>In PowerShell 7 you can render the release note as a markdown document and display it as markdown in the console. Or use the -UseBrowser parameter with Show-Markdown to open the in a web browser. Referenced GitHub issues should have links to the original issue.</maml:para>
+          <maml:para>In PowerShell 7, you can render the release note as a markdown document and display it as markdown in the console. This example will show the release note for the most recent preview release. You might also use the -UseBrowser parameter with Show-Markdown to open the in a web browser. Referenced GitHub issues should have links to the original issue.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
@@ -651,6 +674,10 @@ Notes      : ## Changes
         <maml:linkText>Online Version:</maml:linkText>
         <maml:uri>https://bit.ly/2Ck0MF6</maml:uri>
       </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Install-WTRelease</maml:linkText>
+        <maml:uri></maml:uri>
+      </maml:navigationLink>
     </command:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
@@ -659,7 +686,7 @@ Notes      : ## Changes
       <command:verb>Install</command:verb>
       <command:noun>WTRelease</command:noun>
       <maml:description>
-        <maml:para>Install the latest Windows Terminal release</maml:para>
+        <maml:para>Install the latest Windows Terminal release.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -792,7 +819,7 @@ Notes      : ## Changes
       <command:verb>Open</command:verb>
       <command:noun>WTDefault</command:noun>
       <maml:description>
-        <maml:para>Open Windows Terminal default.json file</maml:para>
+        <maml:para>Open Windows Terminal default.json file.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -851,11 +878,11 @@ Notes      : ## Changes
       <command:verb>Test</command:verb>
       <command:noun>WTVersion</command:noun>
       <maml:description>
-        <maml:para>Test if newer version of Windows Terminal is installed.</maml:para>
+        <maml:para>Test if an updated version of Windows Terminal is installed.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Because Windows Terminal can update in the background, you may not be aware that you are running a newer version. A newer version might offer new features to enable in your settings file or things that you have to change. This command will compare the currently installed version with saved information from the last time the command was run. If the version is newer, this command returns True. The command writes a small json file to $Home.</maml:para>
+      <maml:para>Because Windows Terminal can update in the background, you may not be aware that you are running a newer version. An updated version might offer new features to enable in your settings file or things that you have to change. This command will compare the currently installed version with saved information from the last time the command was run. If the Windows Terminal version is newer, this command returns True. This function writes a small json file to $Home.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -904,7 +931,7 @@ False</dev:code>
     Start-Process https://github.com/microsoft/terminal/releases
 }</dev:code>
         <dev:remarks>
-          <maml:para>Because Windows Terminal can silently update, it may be difficult to know if you are running a new version. You might use the `Test-WTVersion` command in your PowerShell profile script with this code snippet.</maml:para>
+          <maml:para>Because Windows Terminal can silently update, it may be awkward to know if you are running a new version. You might use the `Test-WTVersion` command in your PowerShell profile script with this code snippet.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>

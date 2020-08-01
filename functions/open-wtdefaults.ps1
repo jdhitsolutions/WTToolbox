@@ -1,26 +1,33 @@
-# a simple script to open the defaults.json file for Windows Terminal using
-# the assoociate application for json files
+
 Function Open-WTDefault {
     [CmdletBinding()]
     Param()
 
     Write-Verbose "[$((Get-Date).TimeofDay)] Starting $($MyInvocation.MyCommand)"
-    Write-Verbose "[$((Get-Date).TimeofDay)] Getting AppxPackage for Microsoft.WindowsTerminal"
-    $app = Get-AppxPackage Microsoft.WindowsTerminal
 
-    if (Test-Path $app.InstallLocation) {
-        $json = Join-Path -path $app.installlocation -ChildPath defaults.json
+    <#
+    Need to account for preview and/or stable releases.
+    Only run this command is a Windows Terminal session.
+    #>
+
+    Write-Verbose "[$((Get-Date).TimeofDay)] Getting process path"
+    $wtProcess = Get-WTProcess | where-object {$_.name -eq 'WindowsTerminal'}
+    $appPath = Split-Path -path $wtProcess.path
+
+    if ($appPath) {
+        Write-Verbose "[$((Get-Date).TimeofDay)] Using process path $appPath"
+        $json = Join-Path -path $appPath -ChildPath defaults.json
+        Write-Verbose "[$((Get-Date).TimeofDay)] Testing for $json"
         if (Test-Path $json) {
             Write-Verbose "[$((Get-Date).TimeofDay)] Opening $json"
             Invoke-Item $json
         }
         else {
-            Write-Warning "Could not find default.json file."
+            Write-Warning "Could not find $json."
         }
     }
     else {
-        Throw "Windows Terminal is not installed."
+        Throw "Windows Terminal is not installed or you are not running this session of PowerShell in it."
     }
-
     Write-Verbose "[$((Get-Date).TimeofDay)] Ending $($MyInvocation.MyCommand)"
 }

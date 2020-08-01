@@ -8,7 +8,8 @@ schema: 2.0.0
 # Get-WTKeyBinding
 
 ## SYNOPSIS
-Display Windows Terminal key binding information
+
+Display Windows Terminal key binding information.
 
 ## SYNTAX
 
@@ -18,26 +19,23 @@ Get-WTKeyBinding [[-Format] <String>] [<CommonParameters>]
 
 ## DESCRIPTION
 
-Get Windows Terminal key binding settings and display with your choice of formats.
-If a keybinding from your settings.json file has the same keys as a default, the
-default is overwritten in the output.
+Get Windows Terminal key binding settings and display with your choice of formats. If a keybinding from your settings.json file has the same key combination as a default, the default setting is overwritten.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
 ```powershell
-c:\scripts\Get-WTKeyBindings -format grid
+PS C:\Get-WTKeyBinding -format grid
 ```
 
-This is a PowerShell script so you need to specify the path to the file.
+Get Windows Terminal key bindings and display in Out-Gridview.
 
 ## PARAMETERS
 
 ### -Format
 
-Specify how to display the results.
-Possible values are:  Table,List,Grid, and None
+Specify how to display the results. Possible values are: Table,List,Grid, and None.
 
 This parameter has an alias of 'out'.
 

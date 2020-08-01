@@ -20,7 +20,7 @@ Backup-WTSetting [[-Limit] <Int32>] [-Destination] <String> [-Passthru] [-WhatIf
 
 ## DESCRIPTION
 
-Use this command to create a backup copy of the settings.json file for Windows Terminal. Each backup will be numbered up to the the specified limit. The oldest file will be called settings.bak1.json with the number incrementing for each backup.
+Use this command to create a backup copy of the settings.json file for Windows Terminal. Each backup will be numbered up to the  specified limit. The oldest file will be called settings.bak1.json with the number incrementing for each backup.
 
 ## EXAMPLES
 

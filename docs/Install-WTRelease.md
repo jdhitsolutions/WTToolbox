@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Install the latest Windows Terminal release
+Install the latest Windows Terminal release.
 
 ## SYNTAX
 
@@ -100,4 +100,4 @@ Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell
 
 ## RELATED LINKS
 
-[Get-WTCurrentRelease]()
+[Get-WTCurrentRelease](Get-WTCurrentRelease.md)

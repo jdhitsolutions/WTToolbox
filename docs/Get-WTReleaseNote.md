@@ -9,12 +9,12 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Get the latest Windows Terminal release information from GitHub
+Get the latest Windows Terminal release information from GitHub.
 
 ## SYNTAX
 
 ```yaml
-Get-WTReleaseNote [-AsMarkdown] [-Online] [<CommonParameters>]
+Get-WTReleaseNote [-AsMarkdown] [-Online] [-Preview] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -48,12 +48,10 @@ Notes      : ## Changes
 ### Example 2
 
 ```powershell
-PS C:\> Get-WTReleaseNote -AsMarkdown | Show-Markdown
+PS C:\> Get-WTReleaseNote -AsMarkdown -Preview | Show-Markdown
 ```
 
-In PowerShell 7 you can render the release note as a markdown document and display it as markdown in the console.
-Or use the -UseBrowser parameter with Show-Markdown to open the in a web browser.
-Referenced GitHub issues should have links to the original issue.
+In PowerShell 7, you can render the release note as a markdown document and display it as markdown in the console. This example will show the release note for the most recent preview release. You might also use the -UseBrowser parameter with Show-Markdown to open the in a web browser. Referenced GitHub issues should have links to the original issue.
 
 ### Example 3
 
@@ -97,6 +95,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Preview
+
+Get the latest preview release.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -116,3 +130,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
 
 ## RELATED LINKS
+
+[Install-WTRelease](Install-WTRelease.md)

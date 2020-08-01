@@ -1,5 +1,14 @@
 # Change Log for WTToolBox
 
+## 1.8.0
+
++ Modified module commands to take the Preview version into account. It is possible someone will have the preview installed and not the stable release. (Issue #6)
++ Updated the `WTDefaults` global variable to include the path and to accommodate multiple installed releases.
++ Revised `Open-WTDefault` to only run in a Windows Terminal session and to better detect if running under preview or stable release.
++ Added a `-Preview` parameter to `Get-WTReleaseNote` to retrieve the release note from the latest preview.
++ Revised `Get-WTKeyBinding` to handle possible property name change of `keybindings` to `bindings`.
++ Help updates
+
 ## 1.7.0
 
 + Fixed bug in `Install-WTToolbox` that was breaking the installation.
@@ -47,7 +56,7 @@
 
 ## 1.1.0
 
-+ Added `Test-WTVersion`
++ Added `Test-WTVersion`.
 + Modified module to create a global variable `$WTSettings` with a converted version of `settings.json`.
 + Modified module to create a global variable `WTSettingsPath` with the path to the `setting.json` file.
 + Modified module to create a global variable `$WTDefaults` with a converted version of `defaults.json`.

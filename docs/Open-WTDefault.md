@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Open Windows Terminal default.json file
+Open Windows Terminal default.json file.
 
 ## SYNTAX
 

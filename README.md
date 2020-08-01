@@ -12,7 +12,7 @@ A set of PowerShell functions for managing and working with the [Windows Termina
 Install-Module WTToolBox
 ```
 
-Of course, it is assumed you have `Windows Terminal` installed or planned to. If `Windows Terminal` is not installed, you will get an warning message when you import this module.
+Of course, it is assumed you have `Windows Terminal` installed or planned to. If `Windows Terminal` is not installed, you will get a warning message when you import this module.
 
 ## Module Commands
 
@@ -36,7 +36,7 @@ Install-WTRelease [-preview]
 
 ### Displaying Key Bindings
 
-Keeping track of all the possible keyboard shortcuts or keybindings can be difficult. `Get-WTKeyBinding` will go through all defined keybindings and display them. The command writes a custom object to the pipeline for each key binding. To simplify things, the command includes a formatting option so you can easily control how the settings are displayed.
+Keeping track of all the possible keyboard shortcuts or keybindings can be difficult. `Get-WTKeyBinding` will go through all defined keybindings and display them. The function writes a custom object to the pipeline for each key binding. To simplify things, the command includes a formatting option so you can easily control how the settings are displayed.
 
 ![Get-WTKeyBinding](assets/get-wtkeybinding.png)
 
@@ -52,7 +52,7 @@ Use `Get-WTCurrent` to display the settings for the current PowerShell session i
 
 ### Tracking Windows Terminal Version
 
-Because `Windows Terminal` can silently update, it may be difficult to know if you are running a new version. You might use the `Test-WTVersion` command in your PowerShell profile script like this:
+Because `Windows Terminal` can silently update, it may be awkward to know if you are running a new version. You might use the `Test-WTVersion` command in your PowerShell profile script like this:
 
 ```powershell
 if ( $env:wt_session -AND Test-WTVersion) {
@@ -61,7 +61,7 @@ if ( $env:wt_session -AND Test-WTVersion) {
 }
 ```
 
-On a related note, you can also use `Get-WTReleaseNote` which will get the latest release information from the `Windows Terminal` GitHub repository. If you are running PowerShell 7.x, you can pipe the command to `Show-Markdown`.
+On a related note, you can also use `Get-WTReleaseNote,` which will get the latest release information from the `Windows Terminal` GitHub repository. If you are running PowerShell 7.x, you can pipe the command to `Show-Markdown`.
 
 ```powershell
 Get-WTReleaseNote | Show-Markdown -UseBrowser
@@ -82,7 +82,7 @@ Windows Terminal v1.0.1811.0 v1.0.1811.0 6/30/2020 6:59:57 PM 1.0.1811.0
 
 ### Windows Terminal Processes
 
-The `Get-WTProcess` command will get all processes associated with the current Windows Terminal process. The output is a normal `System.Diagnostics.Process` object, but the default formatting has been customized to highlight the current PowerShell process.
+The `Get-WTProcess` command will get all processes associated with your Windows Terminal process. The output is a standard `System.Diagnostics.Process` object, but the default formatting has been customized to highlight the current PowerShell process.
 
 ![Get-WTProcess](assets/wtprocess-ansi.png)
 
@@ -106,11 +106,13 @@ initialCols initialRows
         120          30
 ```
 
-When you import the module, it will also create a variable called `WTDefaultsPath` which points to the `defaults.json` file. This makes it easier if you want to do something with the file like make a copy. If you want to view the file you can use the `Open-WTDefault` command.
+When you import the module, it will also create a variable called `$WTDefaultsPath,` which points to the `defaults.json` file. The variable makes it easier if you want to do something with it like make a copy. If you need to view the file, you can use the `Open-WTDefault` command.
+
+> If you have a preview release also installed, this variable will have two objects.
 
 ### WTSettings
 
-The last object is a customized version of the data in `settings.json`. The object should make it easier to see your settings.
+The last object is a customized version of the data in `settings.json`. `$WTSettings` should make it easier to see your settings.
 
 ```powershell
 PS C:\> $wtsettings.profiles.list | where-object hidden
@@ -149,10 +151,10 @@ PS C:\> $WTSettings.refresh()
 
 The method doesn't write anything to the pipeline.
 
-> A quick note on the settings and defaults objects. The JSON standard does not recognize comments, yet they are used in `Windows Terminal` settings files. You can see them with leading // characters. In order to convert the JSON to objects, these comments must be stripped out of the content. This is done with a regular expression. PowerShell 7 is more forgiving if it detects comments. Windows PowerShell will refuse to convert the content from JSON. Although the module has been updated to better handle comments, tt is recommended that if you are using comments, that you insert a space after the leading slashes like this: `// this is a comment`.
+> A quick note on the `settings` and `default` objects. The JSON standard does not recognize comments, yet they are used in `Windows Terminal` settings files. You can see them with leading // characters. To avoid errors when converting the JSON to objects, these comments must be stripped out of the content. The clean-up process is done with a regular expression. PowerShell 7 is more forgiving if it detects comments. Windows PowerShell will refuse to convert the content from JSON. Although the module has been updated to better handle comments, it is recommended if you are using comments, that you insert a space after the leading slashes like this: `// this is a comment`.
 
 ## Future Versions
 
 If you have any suggestions for enhancements or bug reports, please use the Issues section of this repository.
 
-> *Last updated 2020-07-29 19:10:05Z UTC*
+> *Last updated 2020-08-01 19:17:20Z UTC*
