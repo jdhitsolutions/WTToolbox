@@ -12,7 +12,7 @@ A set of PowerShell functions for managing and working with the [Windows Termina
 Install-Module WTToolBox
 ```
 
-Of course, it is assumed you have `Windows Terminal` installed or planned to. If `Windows Terminal` is not installed, you will get a warning message when you import this module.
+Of course, it is assumed you have `Windows Terminal` installed, or you plan to install. If `Windows Terminal` is not installed, you will get a warning message when you import this module.
 
 ## Module Commands
 
@@ -34,9 +34,11 @@ You can install the latest stable or preview release of Windows Terminal using t
 Install-WTRelease [-preview]
 ```
 
+The `Install-WTRelease` function has an alias of `Install-WindowsTerminal`.
+
 ### Displaying Key Bindings
 
-Keeping track of all the possible keyboard shortcuts or keybindings can be difficult. `Get-WTKeyBinding` will go through all defined keybindings and display them. The function writes a custom object to the pipeline for each key binding. To simplify things, the command includes a formatting option so you can easily control how the settings are displayed.
+Keeping track of all the possible keyboard shortcuts or keybindings can be difficult. `Get-WTKeyBinding` will go through all defined keybindings and display them. The function writes a custom object to the pipeline for each key binding. To make this command easier to use, `Get-WTKeybinding` includes a formatting option so you can easily control how the settings are displayed.
 
 ![Get-WTKeyBinding](assets/get-wtkeybinding.png)
 
@@ -85,6 +87,8 @@ Windows Terminal v1.0.1811.0 v1.0.1811.0 6/30/2020 6:59:57 PM 1.0.1811.0
 The `Get-WTProcess` command will get all processes associated with your Windows Terminal process. The output is a standard `System.Diagnostics.Process` object, but the default formatting has been customized to highlight the current PowerShell process.
 
 ![Get-WTProcess](assets/wtprocess-ansi.png)
+
+`Get-WTProcess` has an alias of `gwtp`.
 
 ## Global Variables
 
@@ -151,7 +155,7 @@ PS C:\> $WTSettings.refresh()
 
 The method doesn't write anything to the pipeline.
 
-> A quick note on the `settings` and `default` objects. The JSON standard does not recognize comments, yet they are used in `Windows Terminal` settings files. You can see them with leading // characters. To avoid errors when converting the JSON to objects, these comments must be stripped out of the content. The clean-up process is done with a regular expression. PowerShell 7 is more forgiving if it detects comments. Windows PowerShell will refuse to convert the content from JSON. Although the module has been updated to better handle comments, it is recommended if you are using comments, that you insert a space after the leading slashes like this: `// this is a comment`.
+> A quick note on the `settings` and `default` objects. The JSON standard does not recognize comments, yet they are used in `Windows Terminal` settings files. You can see them with leading // characters. To avoid errors when converting the JSON to objects, these comments must be stripped out of the content. The clean-up process is done with a regular expression. PowerShell 7 is more forgiving if it detects comments. Windows PowerShell will refuse to convert the content from JSON. Although the module can handle JSON comments, the recommendation is that if you are using comments, that you insert a space after the leading slashes like this:  `// this is a comment`.
 
 ## Future Versions
 
