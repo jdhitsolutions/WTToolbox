@@ -1,6 +1,6 @@
 Function Get-WTKeyBinding {
-
     [cmdletbinding()]
+    [alias("gwtk")]
     Param(
         [Parameter(HelpMessage = "Specify how to display the results")]
         [ValidateSet("Table", "Grid", "List", "None")]

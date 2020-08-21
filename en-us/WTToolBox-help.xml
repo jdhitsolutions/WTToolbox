@@ -10,7 +10,7 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Use this command to create a backup copy of the settings.json file for Windows Terminal. Each backup will be numbered up to the  specified limit. The oldest file will be called settings.bak1.json with the number incrementing for each backup.</maml:para>
+      <maml:para>Use this command to create a backup copy of the settings.json file for Windows Terminal. Each backup will be numbered up to the  specified limit. The oldest file will be called settings.bak1.json, with the number incrementing for each backup.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -166,6 +166,7 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
+        <maml:para>This command has an alias of bwt.</maml:para>
         <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
       </maml:alert>
     </maml:alertSet>
@@ -225,6 +226,7 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
+        <maml:para>This command has an alias of gwtc.</maml:para>
         <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
       </maml:alert>
     </maml:alertSet>
@@ -413,6 +415,7 @@ Windows Terminal v1.0.1811.0 v1.0.1811.0 6/30/2020 6:59:57 PM 1.0.1811.0</dev:co
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
+        <maml:para>This command has an alias of gwtk.</maml:para>
         <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
       </maml:alert>
     </maml:alertSet>

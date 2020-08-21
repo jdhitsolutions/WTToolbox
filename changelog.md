@@ -1,5 +1,13 @@
 # Change Log for WTToolBox
 
+## 1.9.1
+
++ Forgot to define the `gwtc` alias.
++ Added an alias `gwtk` for `Get-WTKeyBinding`.
++ Added an alias `bwt` for `Backup-WTSetting`.
++ Updated `README.md`.
++ Help updates.
+
 ## 1.9.0
 
 + Fixed bug that was causing `Install-WTRelease` to fail. (Issue #7)

@@ -4,6 +4,7 @@
 Function Backup-WTSetting {
 
     [CmdletBinding(SupportsShouldProcess)]
+    [alias("bwt")]
     Param(
         #how many backup copies should be saved
         [ValidateScript({$_ -ge 1})]

@@ -29,7 +29,6 @@ Windows Terminal uses a default.json file for default settings that can be overw
 PS C:\>  Open-WTDefault
 ```
 
-
 ## PARAMETERS
 
 ### CommonParameters

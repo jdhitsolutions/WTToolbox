@@ -1,5 +1,6 @@
 Function Get-WTCurrent {
     [cmdletbinding()]
+    [alias('gwtc')]
     Param ()
     Begin {
         Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($myinvocation.mycommand)"
