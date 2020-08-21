@@ -1,6 +1,7 @@
 Function Install-WTRelease {
     [cmdletbinding(SupportsShouldProcess)]
     [OutputType("none")]
+    [Alias("Install-WindowsTerminal")]
     Param(
         [Parameter(ValueFromPipeline)]
         [switch]$Preview
@@ -26,11 +27,13 @@ Function Install-WTRelease {
                 $data = $get | Where-Object {$_.prerelease -ne "true"} | Select-Object -first 1
             }
             #download
-            $msix = ($data.assets.name).where({$_ -match "\.msixbundle"})
+            #Need to filter out the preinstallkie.zip (Issue #7)
+            $msix = ($data.assets).where( {$_.name -match '\.msixbundle$'})
+            #($data.assets.name).where({$_ -match '\.msixbundle$'})
 
             Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Downloading $msix"
-            $src = $data.assets[0].browser_download_url
-            $target = Join-Path -Path $env:temp -ChildPath $msix.trim()
+            $src = $msix.browser_download_url
+            $target = Join-Path -Path $env:temp -ChildPath $msix.name.trim()
             if ($pscmdlet.shouldProcess($src, "Download and install")) {
                 Invoke-WebRequest -uri $src -outfile $target -disableKeepAlive -useBasicParsing -erroraction Stop
                 Add-AppxPackage -Path $target -ErrorAction stop

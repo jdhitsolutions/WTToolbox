@@ -790,6 +790,7 @@ Notes      : ## Changes
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
+        <maml:para>This command has an alias of Install-WindowsTerminal.</maml:para>
         <maml:para>Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/</maml:para>
       </maml:alert>
     </maml:alertSet>

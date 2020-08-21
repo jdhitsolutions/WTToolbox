@@ -1,5 +1,12 @@
 # Change Log for WTToolBox
 
+## 1.9.0
+
++ Fixed bug that was causing `Install-WTRelease` to fail. (Issue #7)
++ Added an alias `Install-WindowsTerminal` for `Install-WTRelease`.
++ Added an alias `gwtp` for `Get-WTProcess`.
++ Added an alias `gwtc` for `Get-WTCurrent`.
+
 ## 1.8.0
 
 + Modified module commands to take the Preview version into account. It is possible someone will have the preview installed and not the stable release. (Issue #6)

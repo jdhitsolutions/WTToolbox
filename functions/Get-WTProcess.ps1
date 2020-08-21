@@ -2,6 +2,7 @@
 #get the Windows Terminal process and its children
 Function Get-WTProcess {
     [cmdletbinding()]
+    [alias("gwtp")]
     [OutputType("WTProcess")]
     Param()
 

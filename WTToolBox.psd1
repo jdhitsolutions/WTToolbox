@@ -8,7 +8,7 @@
     RootModule = 'WTToolBox.psm1'
 
     # Version number of this module.
-    ModuleVersion = '1.8.0'
+    ModuleVersion = '1.9.0'
 
     # Supported PSEditions
     CompatiblePSEditions = @('Desktop','Core')
@@ -74,7 +74,7 @@
     VariablesToExport = ''
 
     # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-    AliasesToExport = ''
+    AliasesToExport = 'Install-WindowsTerminal','gwtp','gwtc'
 
     # DSC resources to export from this module
     # DscResourcesToExport = @()
@@ -91,7 +91,7 @@
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            Tags = @('WindowsTerminal')
+            Tags = @('WindowsTerminal','wt')
 
             # A URL to the license for this module.
             LicenseUri = 'https://github.com/jdhitsolutions/WTToolbox/blob/master/license.txt'
