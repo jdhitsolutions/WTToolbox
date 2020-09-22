@@ -17,12 +17,11 @@ Function Get-WTKeyBinding {
     Need to get the correct application depending on whether running release or preview
     #>
     if ((Get-WTProcess | Where-Object {$_.name -eq 'WindowsTerminal'}).path -match 'preview') {
-        $pkg = "Microsoft.WindowsTerminalPreview"
+         $install = (GetWTPackage -preview).installLocation
     }
     else {
-        $pkg = "Microsoft.WindowsTerminal"
+        $install = (GetWTPackage).installLocation
     }
-    $install = (Get-AppxPackage -name $pkg).InstallLocation
 
     Write-Verbose "[$((Get-Date).TimeofDay)] Getting defaults.json file"
     $defaults = Join-Path -path $install -ChildPath defaults.json
@@ -36,8 +35,10 @@ Function Get-WTKeyBinding {
     <#
     It looks like the json schema might be changing so I need to allow for name variations.
     8/1/2020 jdh
+
+    Default keybindings are now defined under "actions" 9/22/2020 jdh
     #>
-    $keys = $defaultsettings | Select-Object -Expandproperty "*bindings" |
+    $keys = $defaultsettings | Select-Object -Expandproperty "actions" |
     parsesetting |
     Select-Object -Property *, @{Name = "Source"; Expression = {"Defaults"}}
 
@@ -53,7 +54,9 @@ Function Get-WTKeyBinding {
         $settings = Get-Content -path $settingsjson | Where-Object {$_ -notmatch "//"} | ConvertFrom-Json
         #this might change and be bindings or keybindings
         #only process if there are keybindings
-        $bind = $settings | Select-Object -ExpandProperty "*bindings"
+        #based on new defaults it might also be "actions" 9/22/2020 jdh
+        $bindProp = $settings.psobject.properties.name -match "(bindings)|(keybindings)|(actions)"
+        $bind = $settings | Select-Object -ExpandProperty $bindProp[0]
         if ($bind) {
             $user =$bind |
             parsesetting |

@@ -48,7 +48,7 @@ Notes      : ## Changes
 ### Example 2
 
 ```powershell
-PS C:\> Get-WTReleaseNote -AsMarkdown -Preview | Show-Markdown
+PS C:\> Get-WTReleaseNote -AsMarkdown -Preview | Show-Markdown | more
 ```
 
 In PowerShell 7, you can render the release note as a markdown document and display it as markdown in the console. This example will show the release note for the most recent preview release. You might also use the -UseBrowser parameter with Show-Markdown to open the in a web browser. Referenced GitHub issues should have links to the original issue.

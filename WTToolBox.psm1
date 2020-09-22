@@ -8,7 +8,7 @@ if ($myinvocation.line -match "Verbose") {
 if ($IsWindows -OR $PSEdition -eq 'Desktop') {
 
     Write-Verbose "Dot source the module script files"
-    (Get-ChildItem $PSScriptRoot\functions\*.ps1).foreach( {.$_.fullname})
+    (Get-ChildItem $PSScriptRoot\functions\*.ps1).foreach({.$_.fullname})
 
     Write-Verbose "Testing for Microsoft.WindowsTerminal"
     <#
@@ -18,7 +18,17 @@ if ($IsWindows -OR $PSEdition -eq 'Desktop') {
     #>
 
     #use the settings of the currently running Windows Terminal
-    $app = Get-AppxPackage Microsoft.WindowsTerminal*
+
+    <#
+    Sept. 22, 2020 JH
+    PowerShell 7.1 previews are based on a newer version of .NET Core which breaks the AppX cmdlets. I'll use remoting to Windows PowerShell.
+    #>
+    if ($PSVersionTable.PSVersion.ToString() -match "^7\.1") {
+        $app = Invoke-Command -ScriptBlock { Get-AppxPackage Microsoft.WindowsTerminal*} -ConfigurationName Microsoft.PowerShell -ComputerName localhost
+    }
+    else {
+        $app = Get-AppxPackage Microsoft.WindowsTerminal*
+    }
 
     if ($app) {
         Write-Verbose "Windows Terminal is installed"

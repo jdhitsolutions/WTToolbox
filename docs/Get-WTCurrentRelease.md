@@ -30,7 +30,17 @@ PS C:\> Get-WTCurrentRelease
 
 Name                         Version     Released             LocalVersion
 ----                         -------     --------             ------------
-Windows Terminal v1.0.1811.0 v1.0.1811.0 6/30/2020 6:59:57 PM 1.0.1811.0
+Windows Terminal v1.3.2651.0 v1.3.2651.0 9/22/2020 4:00:29 PM 1.2.2381.0
+```
+
+### Example 2
+
+```powershell
+PS C:\> Get-WTCurrentRelease -Preview
+
+Name                                 Version     Released             LocalVersion
+----                                 -------     --------             ------------
+Windows Terminal Preview v1.4.2652.0 v1.4.2652.0 9/22/2020 4:00:31 PM 1.3.2382.0
 ```
 
 ## PARAMETERS

@@ -59,3 +59,27 @@ Function AddWTSettingsVariable {
     }
 
 }
+
+Function GetWTPackage {
+    [cmdletbinding()]
+    Param([switch]$Preview)
+
+    if ($Preview) {
+        $name = "Microsoft.WindowsTerminalPreview"
+    }
+    else {
+        $name = "Microsoft.WindowsTerminal"
+    }
+    <#
+    Sept. 22, 2020 JH
+    PowerShell 7.1 previews are based on a newer version of .NET Core which breaks the AppX cmdlets. I'll use remoting to Windows PowerShell.
+    #>
+    if ($PSVersionTable.PSVersion.ToString() -match "^7\.1") {
+        Write-Verbose "[$((Get-Date).TimeofDay)] Detected PowerShell 7.1"
+        Invoke-Command -ScriptBlock { Get-AppxPackage $using:Name } -ConfigurationName Microsoft.PowerShell -ComputerName localhost
+    }
+    else {
+         Get-AppxPackage -Name $name
+    }
+
+}

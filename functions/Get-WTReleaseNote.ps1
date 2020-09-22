@@ -21,13 +21,12 @@ Function Get-WTReleaseNote {
 
         if ($Preview) {
             Write-Verbose "[$((Get-Date).TimeofDay)] Getting PREVIEW release information"
-            $prerelease = "true"
+            $data = $get | Where-Object { $_.prerelease } | Select-Object -first 1
         }
         else {
             Write-Verbose "[$((Get-Date).TimeofDay)] Getting STABLE release information"
-            $prerelease = "false"
+            $data = $get | Where-Object { -Not $_.prerelease } | Select-Object -first 1
         }
-        $data = $get | Where-Object {$_.prerelease -eq $prerelease} | Select-Object -first 1
 
         $data | Select-Object -Property Name,tag_name,published_at,prerelease,
 

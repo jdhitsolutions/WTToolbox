@@ -6,7 +6,8 @@ Function Test-WTVersion {
 
     Write-Verbose "[$((Get-Date).TimeofDay)] Starting $($myinvocation.MyCommand)"
     Write-Verbose "[$((Get-Date).TimeofDay)] Get the currently installed application"
-    $pkg = Get-AppxPackage -Name Microsoft.WindowsTerminal
+
+    $pkg = GetWTPackage
 
     If ($pkg) {
 

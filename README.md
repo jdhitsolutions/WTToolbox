@@ -9,7 +9,7 @@
 A set of PowerShell functions for managing and working with the [Windows Terminal](https://www.microsoft.com/store/productId/9N0DX20HK701) application from Microsoft. You can download the module from the PowerShell Gallery. It should work on __Windows__ platforms under Windows PowerShell and PowerShell 7.
 
 ```powershell
-Install-Module WTToolBox
+Install-Module WTToolBox [-scope CurrentUser]
 ```
 
 Of course, it is assumed you have `Windows Terminal` installed, or you plan to install. If `Windows Terminal` is not installed, you will get a warning message when you import this module.
@@ -161,4 +161,4 @@ The method doesn't write anything to the pipeline.
 
 If you have any suggestions for enhancements or bug reports, please use the Issues section of this repository.
 
-> *Last updated 2020-08-21 10:45:56Z*
+Last Updated *2020-09-22 14:47:02Z*

@@ -1,5 +1,12 @@
 # Change Log for WTToolBox
 
+## 1.10.0
+
++ Added a private function called `GetWTPackage` to get the Windows Terminal Appx package. This command will fall back to PowerShell Remoting when running PowerShell 7.1.
++ Updated `Get-WTKeyBindings` to handle property name change to `Action` for default keybindings.
++ Fixed a bug in `Get-WTReleaseNote` to separate preview and stable releases.
++ Updated `README.md`.
+
 ## 1.9.1
 
 + Forgot to define the `gwtc` alias.
@@ -31,7 +38,7 @@
 
 ## 1.6.0
 
-+ Modified by `Get-WTCurrent` to work when settings file is based on defaults. (Issue #2)
++ Modified by `Get-WTCurrent` to work when the settings file is based on defaults. (Issue #2)
 + Modified the regex pattern used to filter out comments to not require a space after //.
 + Added online links to help documentation.
 + Fixed typo in `AddWTSettingsVariable` that was preventing LastUpdated and LastRefresh properties from being defined.

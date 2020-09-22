@@ -14,8 +14,8 @@ InModuleScope WTToolBox {
             {Test-ModuleManifest -Path "$PSScriptRoot\..\WTToolBox.psd1"} | Should Not Throw True
         }
 
-        It "Should export 7 commands" {
-            ( (Get-Module WTToolbox).ExportedCommands).count | Should Be 9
+        It "Should export 7 functions" {
+            ( (Get-Module WTToolbox).ExportedFunctions).count | Should Be 9
         }
 
         $psdata = (Get-Module WTToolBox).PrivateData.psdata
@@ -202,7 +202,7 @@ return $fake
             } -ParameterFilter {$Path -eq "Testdrive:" -AND $childpath -eq "defaults.json" }
             Mock Test-Path {$True}
 
-            $f = Get-WTKeybinding 
+            $f = Get-WTKeybinding
             It "Should call Get-AppxPackage" {
                 Assert-MockCalled "Get-AppxPackage" -Scope Context
             }

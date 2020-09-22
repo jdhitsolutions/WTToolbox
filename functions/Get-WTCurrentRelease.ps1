@@ -16,12 +16,12 @@ Function Get-WTCurrentRelease {
         if ($Preview) {
             Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Getting latest preview release"
             $data = $get | Where-Object {$_.prerelease -eq "true"} | Select-Object -first 1
-            $local = Get-AppxPackage Microsoft.WindowsTerminalPreview
+            $local = GetWTPackage -preview
         }
         else {
             Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Getting latest stable release"
             $data = $get | Where-Object {$_.prerelease -ne "true"} | Select-Object -first 1
-            $local = Get-AppxPackage Microsoft.WindowsTerminal
+            $local = GetWTPackage
         }
 
         if ($data.tag_name) {

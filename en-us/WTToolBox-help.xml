@@ -332,7 +332,18 @@ useAcrylic                 : True</dev:code>
 
 Name                         Version     Released             LocalVersion
 ----                         -------     --------             ------------
-Windows Terminal v1.0.1811.0 v1.0.1811.0 6/30/2020 6:59:57 PM 1.0.1811.0</dev:code>
+Windows Terminal v1.3.2651.0 v1.3.2651.0 9/22/2020 4:00:29 PM 1.2.2381.0</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-WTCurrentRelease -Preview
+
+Name                                 Version     Released             LocalVersion
+----                                 -------     --------             ------------
+Windows Terminal Preview v1.4.2652.0 v1.4.2652.0 9/22/2020 4:00:31 PM 1.3.2382.0</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -659,7 +670,7 @@ Notes      : ## Changes
       </command:example>
       <command:example>
         <maml:title>-------------------------- Example 2 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-WTReleaseNote -AsMarkdown -Preview | Show-Markdown</dev:code>
+        <dev:code>PS C:\&gt; Get-WTReleaseNote -AsMarkdown -Preview | Show-Markdown | more</dev:code>
         <dev:remarks>
           <maml:para>In PowerShell 7, you can render the release note as a markdown document and display it as markdown in the console. This example will show the release note for the most recent preview release. You might also use the -UseBrowser parameter with Show-Markdown to open the in a web browser. Referenced GitHub issues should have links to the original issue.</maml:para>
         </dev:remarks>

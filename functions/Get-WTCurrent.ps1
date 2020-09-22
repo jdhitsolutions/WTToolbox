@@ -25,7 +25,7 @@ Function Get-WTCurrent {
                 $profile
             }
             else {
-                write-Warning "Failed to find a profile with a GUID matching $env:WT_PROFILE_ID"
+                Write-Warning "Failed to find a profile with a GUID matching $env:WT_PROFILE_ID"
             }
         }
         Else {
