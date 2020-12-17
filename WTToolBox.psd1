@@ -8,7 +8,7 @@
     RootModule = 'WTToolBox.psm1'
 
     # Version number of this module.
-    ModuleVersion = '1.10.0'
+    ModuleVersion = '1.10.1'
 
     # Supported PSEditions
     CompatiblePSEditions = @('Desktop','Core')
@@ -91,7 +91,7 @@
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            Tags = @('WindowsTerminal','wt')
+            Tags = @('WindowsTerminal','wt','terminal')
 
             # A URL to the license for this module.
             LicenseUri = 'https://github.com/jdhitsolutions/WTToolbox/blob/master/license.txt'

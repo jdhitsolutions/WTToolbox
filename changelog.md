@@ -1,5 +1,10 @@
 # Change Log for WTToolBox
 
+## v1.10.1
+
++ Added better error handling when encountering bad JSON. (Issue #8)
++ Minor updates to `README.md`.
+
 ## 1.10.0
 
 + Added a private function called `GetWTPackage` to get the Windows Terminal Appx package. This command will fall back to PowerShell Remoting when running PowerShell 7.1.

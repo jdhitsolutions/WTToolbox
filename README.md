@@ -4,15 +4,17 @@
 
 ![WindowsTerminal](assets/wt-icon.png)
 
-## Windows Terminal PowerShell Toolbox
+## Windows Terminal Toolbox
 
-A set of PowerShell functions for managing and working with the [Windows Terminal](https://www.microsoft.com/store/productId/9N0DX20HK701) application from Microsoft. You can download the module from the PowerShell Gallery. It should work on __Windows__ platforms under Windows PowerShell and PowerShell 7.
+A set of PowerShell functions for managing and working with the [Windows Terminal](https://www.microsoft.com/store/productId/9N0DX20HK701) application from Microsoft. You can download the module from the PowerShell Gallery. This module should work on __Windows__ platforms under Windows PowerShell and PowerShell 7.
 
 ```powershell
 Install-Module WTToolBox [-scope CurrentUser]
 ```
 
 Of course, it is assumed you have `Windows Terminal` installed, or you plan to install. If `Windows Terminal` is not installed, you will get a warning message when you import this module.
+
+If you want some background information on Windows Terminal, take a look at [https://devblogs.microsoft.com/commandline/getting-started-with-windows-terminal/](https://devblogs.microsoft.com/commandline/getting-started-with-windows-terminal/).
 
 ## Module Commands
 
@@ -43,6 +45,10 @@ Keeping track of all the possible keyboard shortcuts or keybindings can be diffi
 ![Get-WTKeyBinding](assets/get-wtkeybinding.png)
 
 Or as a grid using `Out-GridView`.
+
+```powershell
+Get-WTKeybinding -format grid
+```
 
 ![Get-WTKeyBinding](assets/wtkeybindings.png)
 
@@ -77,9 +83,9 @@ You can also use [Get-WTCurrentRelease](docs/Get-WTCurrentRelease.md) to get a q
 PS C:\> Get-WTCurrentRelease
 
 
-Name                         Version     Released             LocalVersion
-----                         -------     --------             ------------
-Windows Terminal v1.0.1811.0 v1.0.1811.0 6/30/2020 6:59:57 PM 1.0.1811.0
+Name                         Version     Released              LocalVersion
+----                         -------     --------              ------------
+Windows Terminal v1.4.3243.0 v1.4.3243.0 11/20/2020 9:43:33 PM 1.4.3243.0
 ```
 
 ### Windows Terminal Processes
@@ -96,7 +102,7 @@ To make it easier to see either default settings or your custom settings, when y
 
 ### WTSettingsPath
 
-The path to `settings.json` is buried in your AppData folder. You can use `$WTSettingsPath` as a placeholder. Yes, you can easily open the file from `Windows Terminal`, but there may be other things you want to do with the path information.
+The path to `settings.json` is buried in your `%AppData%` folder. You can use `$WTSettingsPath` as a placeholder. Yes, you can easily open the file from `Windows Terminal`, but there may be other things you want to do with the path information.
 
 ### WTDefaults
 
@@ -155,10 +161,10 @@ PS C:\> $WTSettings.refresh()
 
 The method doesn't write anything to the pipeline.
 
-> A quick note on the `settings` and `default` objects. The JSON standard does not recognize comments, yet they are used in `Windows Terminal` settings files. You can see them with leading // characters. To avoid errors when converting the JSON to objects, these comments must be stripped out of the content. The clean-up process is done with a regular expression. PowerShell 7 is more forgiving if it detects comments. Windows PowerShell will refuse to convert the content from JSON. Although the module can handle JSON comments, the recommendation is that if you are using comments, that you insert a space after the leading slashes like this:  `// this is a comment`.
+_A quick note on the `settings` and `default` objects. The JSON standard does not recognize comments, yet they are used in `Windows Terminal` settings files. You can see them with leading // characters. To avoid errors when converting the JSON to objects, these comments must be stripped out of the content. The clean-up process is done with a regular expression. PowerShell 7 is more forgiving if it detects comments. Windows PowerShell will refuse to convert the content from JSON. Although the module can handle JSON comments, the recommendation is that if you are using comments, that you insert a space after the leading slashes like this:  `// this is a comment`._
 
 ## Future Versions
 
-If you have any suggestions for enhancements or bug reports, please use the Issues section of this repository.
+If you have any suggestions for enhancements or bug reports, please use the [Issues](https://github.com/jdhitsolutions/WTToolbox/issues) section of this repository.
 
-Last Updated *2020-09-22 14:47:02Z*
+Last Updated *2020-12-08 20:38:34Z*

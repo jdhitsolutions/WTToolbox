@@ -39,9 +39,13 @@ Function AddWTSettingsVariable {
     Write-Verbose "Parsing $global:WTSettingsPath"
     #need to strip out comments for Windows PowerShell
     #$pattern = "(?(?<=:|\/)no)(\/{2})(?=\s+)?"
-     $pattern ="(\/{2})(?=\s+)?"
-    $obj = (Get-Content -path $Global:WTSettingsPath).where({$_ -notmatch $pattern -OR $_ -match "ms-appx:\/{3}"}) | ConvertFrom-Json
-
+    $pattern ="(\/{2})(?=\s+)?"
+    Try {
+        $obj = (Get-Content -path $Global:WTSettingsPath).where({$_ -notmatch $pattern -OR $_ -match "ms-appx:\/{3}"}) | ConvertFrom-Json -ErrorAction Stop
+    }
+        Catch {
+            Write-Warning "Failed to parse settings.json. You might have an error in the file. $($_.Exception.Message)"
+    }
     #only continue if there is an object
     if ($obj) {
         Write-Verbose "Adding custom properties"
@@ -57,7 +61,6 @@ Function AddWTSettingsVariable {
     else {
         Write-Warning "Failed to create the settings object."
     }
-
 }
 
 Function GetWTPackage {
@@ -72,7 +75,7 @@ Function GetWTPackage {
     }
     <#
     Sept. 22, 2020 JH
-    PowerShell 7.1 previews are based on a newer version of .NET Core which breaks the AppX cmdlets. I'll use remoting to Windows PowerShell.
+    PowerShell 7.1 is based on a newer version of .NET Core which breaks the AppX cmdlets. I'll use remoting to Windows PowerShell.
     #>
     if ($PSVersionTable.PSVersion.ToString() -match "^7\.1") {
         Write-Verbose "[$((Get-Date).TimeofDay)] Detected PowerShell 7.1"
@@ -81,5 +84,4 @@ Function GetWTPackage {
     else {
          Get-AppxPackage -Name $name
     }
-
 }
