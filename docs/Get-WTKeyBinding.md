@@ -14,41 +14,63 @@ Display Windows Terminal key binding information.
 ## SYNTAX
 
 ```yaml
-Get-WTKeyBinding [[-Format] <String>] [<CommonParameters>]
+Get-WTKeyBinding [-Action <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Get Windows Terminal key binding settings and display with your choice of formats. If a keybinding from your settings.json file has the same key combination as a default, the default setting is overwritten.
+Get Windows Terminal key binding settings. If a keybinding from your settings.json file has the same key combination as a default, the default setting is overwritten. Use the Action parameter to filter for specific types of actions.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
 ```powershell
-PS C:\Get-WTKeyBinding -format grid
+PS C:\Get-WTKeyBinding
 ```
 
-Get Windows Terminal key bindings and display in Out-Gridview.
+Get Windows Terminal key bindings and display in the default formatted table view.
+
+### EXAMPLE 2
+
+```powershell
+PS C:\> Get-WTKeyBinding -Action *font* | Format-List
+
+
+      Source: Defaults
+
+
+Action         : adjustFontSize
+ActionSettings : delta = 1
+Keys           : ctrl+=
+
+Action         : adjustFontSize
+ActionSettings : delta = -1
+Keys           : ctrl+-
+
+Action         : resetFontSize
+ActionSettings :
+Keys           : ctrl+0
+```
+
+Display a specific action. Wildcards are permitted.
 
 ## PARAMETERS
 
-### -Format
+### -Action
 
-Specify how to display the results. Possible values are: Table,List,Grid, and None.
-
-This parameter has an alias of 'out'.
+Select an action type. The command should autocomplete possible choices.
 
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases: out
+Aliases:
 
 Required: False
-Position: 1
-Default value: "None"
+Position: Named
+Default value: None
 Accept pipeline input: False
-Accept wildcard characters: False
+Accept wildcard characters: True
 ```
 
 ### CommonParameters
@@ -59,9 +81,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### None
-
-### Custom Object
+### wtKeybinding
 
 ## NOTES
 

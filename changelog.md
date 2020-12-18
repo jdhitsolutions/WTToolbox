@@ -1,5 +1,13 @@
 # Change Log for WTToolBox
 
+## v1.11.0
+
++ Fixed IconUri in the module manifest.
++ Modified `Get-WTKeyBinding` to let the user filter on an action.
++ Modified `Get-WTKeyBinding` to write a structured object with a typename of `wtkeybinding` to the pipeline. Removed the `Format` parameter. _This is a breaking change_.
++ Added a custom format file `wtKeybinding.format.ps1xml`.
++ Added an `about_WTToolBox` help topic.
+
 ## v1.10.1
 
 + Added better error handling when encountering bad JSON. (Issue #8)

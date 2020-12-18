@@ -5,31 +5,31 @@
 @{
 
     # Script module or binary module file associated with this manifest.
-    RootModule = 'WTToolBox.psm1'
+    RootModule           = 'WTToolBox.psm1'
 
     # Version number of this module.
-    ModuleVersion = '1.10.1'
+    ModuleVersion        = '1.11.0'
 
     # Supported PSEditions
-    CompatiblePSEditions = @('Desktop','Core')
+    CompatiblePSEditions = @('Desktop', 'Core')
 
     # ID used to uniquely identify this module
-    GUID = 'd7249a30-1995-47f7-9882-f3b6f246a14b'
+    GUID                 = 'd7249a30-1995-47f7-9882-f3b6f246a14b'
 
     # Author of this module
-    Author = 'Jeff Hicks'
+    Author               = 'Jeff Hicks'
 
     # Company or vendor of this module
-    CompanyName = 'JDH Information Technology Solutions, Inc.'
+    CompanyName          = 'JDH Information Technology Solutions, Inc.'
 
     # Copyright statement for this module
-    Copyright = '(c) 2020 Jeff Hicks. All rights reserved.'
+    Copyright            = '(c) 2020 Jeff Hicks. All rights reserved.'
 
     # Description of the functionality provided by this module
-    Description = 'A set of PowerShell functions for managing and working with the Windows Terminal application from Microsoft.'
+    Description          = 'A set of PowerShell functions for managing and working with the Windows Terminal application from Microsoft.'
 
     # Minimum version of the Windows PowerShell engine required by this module
-    PowerShellVersion = '5.1'
+    PowerShellVersion    = '5.1'
 
     # Name of the Windows PowerShell host required by this module
     #PowerShellHostName = 'ConsoleHost'
@@ -59,22 +59,22 @@
     # TypesToProcess = @()
 
     # Format files (.ps1xml) to be loaded when importing this module
-    FormatsToProcess = @("formats\wtprocess.format.ps1xml")
+    FormatsToProcess     = @("formats\wtprocess.format.ps1xml","formats\wtKeybinding.format.ps1xml")
 
     # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
     # NestedModules = @()
 
     # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-    FunctionsToExport = 'Backup-WTSetting','Get-WTKeyBinding','Get-WTProcess','Open-WTDefault','Test-WTVersion','Get-WTReleaseNote','Get-WTCurrent','Get-WTCurrentRelease','Install-WTRelease'
+    FunctionsToExport    = 'Backup-WTSetting', 'Get-WTKeyBinding', 'Get-WTProcess', 'Open-WTDefault', 'Test-WTVersion', 'Get-WTReleaseNote', 'Get-WTCurrent', 'Get-WTCurrentRelease', 'Install-WTRelease'
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
-    CmdletsToExport = ''
+    CmdletsToExport      = ''
 
     # Variables to export from this module
-    VariablesToExport = ''
+    VariablesToExport    = ''
 
     # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-    AliasesToExport = 'Install-WindowsTerminal','gwtp','gwtc','gwtk','bwt'
+    AliasesToExport      = 'Install-WindowsTerminal', 'gwtp', 'gwtc', 'gwtk', 'bwt'
 
     # DSC resources to export from this module
     # DscResourcesToExport = @()
@@ -86,12 +86,12 @@
     # FileList = @()
 
     # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
-    PrivateData = @{
+    PrivateData          = @{
 
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            Tags = @('WindowsTerminal','wt','terminal')
+            Tags       = @('WindowsTerminal', 'wt', 'terminal')
 
             # A URL to the license for this module.
             LicenseUri = 'https://github.com/jdhitsolutions/WTToolbox/blob/master/license.txt'
@@ -100,7 +100,7 @@
             ProjectUri = 'https://github.com/jdhitsolutions/WTToolbox'
 
             # A URL to an icon representing this module.
-            IconUri = 'https://github.com/jdhitsolutions/WTToolbox/blob/v1.0.0/assets/wt-icon.png'
+            IconUri    = 'https://raw.githubusercontent.com/jdhitsolutions/WTToolbox/master/assets/wt-transparent.png'
 
             # ReleaseNotes of this module
             # ReleaseNotes = ''
@@ -115,5 +115,5 @@
     # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
     # DefaultCommandPrefix = ''
 
-    }
+}
 

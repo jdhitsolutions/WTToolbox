@@ -40,17 +40,55 @@ The `Install-WTRelease` function has an alias of `Install-WindowsTerminal`.
 
 ### Displaying Key Bindings
 
-Keeping track of all the possible keyboard shortcuts or keybindings can be difficult. `Get-WTKeyBinding` will go through all defined keybindings and display them. The function writes a custom object to the pipeline for each key binding. To make this command easier to use, `Get-WTKeybinding` includes a formatting option so you can easily control how the settings are displayed.
-
-![Get-WTKeyBinding](assets/get-wtkeybinding.png)
-
-Or as a grid using `Out-GridView`.
+Keeping track of all the possible keyboard shortcuts or keybindings can be difficult. `Get-WTKeyBinding` will go through all defined keybindings and display them.
 
 ```powershell
-Get-WTKeybinding -format grid
+PS C:\> Get-WTKeyBinding
+
+
+   Source: Defaults
+
+Action             ActionSettings        Keys
+------             --------------        ----
+closeWindow                              alt+f4
+toggleFullscreen                         alt+enter
+toggleFullscreen                         f11
+toggleFocusMode
+toggleAlwaysOnTop
+openNewTabDropdown                       ctrl+shift+space
+openSettings                             ctrl+,
+openSettings       target = defaultsFile ctrl+alt+,
+...
+   Source: Settings
+
+Action    ActionSettings                         Keys
+------    --------------                         ----
+copy      singleLine = False                     ctrl+c
+paste                                            ctrl+v
+find                                             ctrl+shift+f
+splitPane split = auto;splitMode = duplicate     alt+shift+d
 ```
 
-![Get-WTKeyBinding](assets/wtkeybindings.png)
+You can also select a specific action:
+
+```poweshell
+PS C:\> Get-WTKeyBinding -Action *font* | Format-List
+
+Source: Defaults
+
+
+Action         : adjustFontSize
+ActionSettings : delta = 1
+Keys           : ctrl+=
+
+Action         : adjustFontSize
+ActionSettings : delta = -1
+Keys           : ctrl+-
+
+Action         : resetFontSize
+ActionSettings :
+Keys           : ctrl+0
+```
 
 ### Getting Current Settings
 
@@ -167,4 +205,4 @@ _A quick note on the `settings` and `default` objects. The JSON standard does no
 
 If you have any suggestions for enhancements or bug reports, please use the [Issues](https://github.com/jdhitsolutions/WTToolbox/issues) section of this repository.
 
-Last Updated *2020-12-08 20:38:34Z*
+Last Updated *2020-12-18 15:23:59Z*
