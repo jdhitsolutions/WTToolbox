@@ -77,8 +77,8 @@ Function GetWTPackage {
     Sept. 22, 2020 JH
     PowerShell 7.1 is based on a newer version of .NET Core which breaks the AppX cmdlets. I'll use remoting to Windows PowerShell.
     #>
-    if ($PSVersionTable.PSVersion.ToString() -match "^7\.1") {
-        Write-Verbose "[$((Get-Date).TimeofDay)] Detected PowerShell 7.1"
+    if ($PSVersionTable.PSVersion.ToString() -match "^7\.[1-9]") {
+        Write-Verbose "[$((Get-Date).TimeofDay)] Detected PowerShell $($matches[0])"
         Invoke-Command -ScriptBlock { Get-AppxPackage $using:Name } -ConfigurationName Microsoft.PowerShell -ComputerName localhost
     }
     else {

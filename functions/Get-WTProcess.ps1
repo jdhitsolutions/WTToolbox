@@ -13,7 +13,7 @@ Function Get-WTProcess {
     #validate the parent process is Windows Terminal
     $parent = Get-Process -id $wt.parentProcessID
     Write-Verbose "[$((Get-Date).TimeofDay)] Found parent process $($parent.processname)"
-    if ($parent.processname -match "WindowsTerminal") {
+    if ($parent.processname -match "WindowsTerminal" -OR $parent.parent.processname -match "WindowsTerminal") {
 
         Write-Verbose "[$((Get-Date).TimeofDay)] Getting child processes of ID $($wt.parentProcessID)"
 

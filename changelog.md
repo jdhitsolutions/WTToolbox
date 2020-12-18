@@ -1,10 +1,17 @@
 # Change Log for WTToolBox
 
+## v1.11.1
+
++ Updated module file to handle failures with the Appx commands in PowerShell 7.1 and later. This will rely on using a remote connection to the Windows PowerShell installation on the local host. If PowerShell remoting is not enabled, this may not work. (Issue #9)
++ Modified module file to use a static value for part of the JSON settings path.
++ Fixed bug in module file that was not resetting Verbose preference.
++ Updated private function `GetWTPackage` to better handle PowerShell 7.x releases and the Appx bug.
+
 ## v1.11.0
 
 + Fixed IconUri in the module manifest.
 + Modified `Get-WTKeyBinding` to let the user filter on an action.
-+ Modified `Get-WTKeyBinding` to write a structured object with a typename of `wtkeybinding` to the pipeline. Removed the `Format` parameter. _This is a breaking change_.
++ Modified `Get-WTKeyBinding` to write a structured object with a typename of `wtKeybinding` to the pipeline. Removed the `Format` parameter. _This is a breaking change_.
 + Added a custom format file `wtKeybinding.format.ps1xml`.
 + Added an `about_WTToolBox` help topic.
 
