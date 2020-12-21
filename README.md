@@ -165,7 +165,7 @@ The last object is a customized version of the data in `settings.json`. `$WTSett
 ```powershell
 PS C:\> $wtsettings.profiles.list | where-object hidden
 
-guid       : {b453ae62-4e3d-5e58-b989-0a998ec441b8}
+guid       : {b453ae62-4e3d-5e58-bget989-0a998ec441b8}
 hidden     : True
 useAcrylic : False
 name       : Azure Cloud Shell
@@ -205,4 +205,4 @@ _A quick note on the `settings` and `default` objects. The JSON standard does no
 
 If you have any suggestions for enhancements or bug reports, please use the [Issues](https://github.com/jdhitsolutions/WTToolbox/issues) section of this repository.
 
-Last Updated *2020-12-18 15:23:59Z*
+Last Updated *2020-12-21 15:37:37Z*

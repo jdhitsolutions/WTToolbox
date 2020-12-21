@@ -50,7 +50,14 @@ if ($IsWindows -OR $PSEdition -eq 'Desktop') {
             #>
 
             #The application name should be static 12/18/2020 jdh
-            $jsonPath = "$ENV:Userprofile\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+            #need to account if using Preview 12/21/2020 jdh (Issue #13)
+            if ($parent.path -match "WindowsTerminalPreview") {
+                $jsonPath = "$ENV:Userprofile\AppData\Local\Packages\Microsoft.WindowsTerminalPreview*_8wekyb3d8bbwe\LocalState\settings.json"
+            }
+            else {
+                $jsonPath = "$ENV:Userprofile\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+
+            }
             Write-Verbose "Using path $jsonPath"
             If (Test-Path $jsonPath) {
                 #Export settings path to a global variable

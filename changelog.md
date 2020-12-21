@@ -1,5 +1,13 @@
 # Change Log for WTToolBox
 
+## v1.12.0
+
++ Updated `Get-WTProcess` to better handle PowerShell preview sessions. (Issue #11)
++ Updated `Get-WTKeybinding` to better handle errors when action type not found. (Issue #10)
++ Fixed issue when importing the module running the Preview version of Windows Terminal. (Issue #13)
++ Added private function `Test-IsWTPreview`.
++ Updated `Test-WTVersion` to better handle Windows Terminal Preview.
+
 ## v1.11.1
 
 + Updated module file to handle failures with the Appx commands in PowerShell 7.1 and later. This will rely on using a remote connection to the Windows PowerShell installation on the local host. If PowerShell remoting is not enabled, this may not work. (Issue #9)

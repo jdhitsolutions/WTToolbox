@@ -58,101 +58,100 @@
                         <TableColumnItems>
                             <TableColumnItem>
                                 <ScriptBlock>
-
-if ($_.id -eq $pid) {
-    "$([char]0x1b)[38;5;47m$($_.HandleCount)$([char]0x1b)[0m"
-}
-else {
-    $_.HandleCount
-}
+                                    if ($_.id -eq $pid) {
+                                        "$([char]0x1b)[38;5;47m$($_.HandleCount)$([char]0x1b)[0m"
+                                    }
+                                    else {
+                                        $_.HandleCount
+                                    }
                                 </ScriptBlock>
                             </TableColumnItem>
                             <TableColumnItem>
                                 <ScriptBlock>
-                                $val = [long]($_.NPM / 1024)
-if ($_.id -eq $pid) {
-    "$([char]0x1b)[38;5;47m$($val)$([char]0x1b)[0m"
-}
-else {
-    $val
-    }
+                                    $val = [long]($_.NPM / 1024)
+                                    if ($_.id -eq $pid) {
+                                        "$([char]0x1b)[38;5;47m$($val)$([char]0x1b)[0m"
+                                    }
+                                    else {
+                                        $val
+                                        }
                                 </ScriptBlock>
                             </TableColumnItem>
                             <TableColumnItem>
                                 <ScriptBlock>
-                                $val = [long]($_.PM / 1024)
-                               if ($_.id -eq $pid) {
-    "$([char]0x1b)[38;5;47m$($val)$([char]0x1b)[0m"
-}
-else {
-    $val
-    }
+                                    $val = [long]($_.PM / 1024)
+                                    if ($_.id -eq $pid) {
+                                        "$([char]0x1b)[38;5;47m$($val)$([char]0x1b)[0m"
+                                    }
+                                    else {
+                                        $val
+                                        }
                                 </ScriptBlock>
                             </TableColumnItem>
                             <TableColumnItem>
                                 <ScriptBlock>
-                                $val = [long]($_.WS / 1024)
-                                if ($_.id -eq $pid) {
-    "$([char]0x1b)[38;5;47m$($val)$([char]0x1b)[0m"
-}
-else {
-    $val
-    }
-                                </ScriptBlock>
-                            </TableColumnItem>
-                            <TableColumnItem>
-                                <ScriptBlock> $val=[long]($_.VM / 1048576)
-                                if ($_.id -eq $pid) {
-    "$([char]0x1b)[38;5;47m$($val)$([char]0x1b)[0m"
-}
-else {
-    $val
-    }
+                                    $val = [long]($_.WS / 1024)
+                                    if ($_.id -eq $pid) {
+                                        "$([char]0x1b)[38;5;47m$($val)$([char]0x1b)[0m"
+                                        }
+                                    else {
+                                        $val
+                                        }
                                 </ScriptBlock>
                             </TableColumnItem>
                             <TableColumnItem>
                                 <ScriptBlock>
-if ($_.CPU -ne $())
-{
-    $val = $_.CPU.ToString("N")
-}
- if ($_.id -eq $pid) {
-    "$([char]0x1b)[38;5;47m$($val)$([char]0x1b)[0m"
-}
-else {
-    $val
-    }
+                                    $val=[long]($_.VM / 1048576)
+                                    if ($_.id -eq $pid) {
+                                        "$([char]0x1b)[38;5;47m$($val)$([char]0x1b)[0m"
+                                    }
+                                    else {
+                                        $val
+                                        }
                                 </ScriptBlock>
                             </TableColumnItem>
                             <TableColumnItem>
                                 <ScriptBlock>
-                                if ($_.id -eq $pid) {
-    "$([char]0x1b)[38;5;47m$($_.id)$([char]0x1b)[0m"
-}
-else {
-    $_.id
-    }
-
+                                    if ($_.CPU -ne $())
+                                    {
+                                        $val = $_.CPU.ToString("N")
+                                    }
+                                    if ($_.id -eq $pid) {
+                                        "$([char]0x1b)[38;5;47m$($val)$([char]0x1b)[0m"
+                                    }
+                                    else {
+                                        $val
+                                        }
                                 </ScriptBlock>
                             </TableColumnItem>
                             <TableColumnItem>
                                 <ScriptBlock>
-                                if ($_.id -eq $pid) {
-    "$([char]0x1b)[38;5;47m$($_.SI)$([char]0x1b)[0m"
-}
-else {
-    $_.SI
-    }
+                                    if ($_.id -eq $pid) {
+                                        "$([char]0x1b)[38;5;47m$($_.id)$([char]0x1b)[0m"
+                                    }
+                                    else {
+                                        $_.id
+                                        }
                                 </ScriptBlock>
                             </TableColumnItem>
                             <TableColumnItem>
                                 <ScriptBlock>
-if ($_.id -eq $pid) {
-    "$([char]0x1b)[38;5;47m$($_.processname)$([char]0x1b)[0m"
-}
-else {
-    $_.processname
-}
+                                    if ($_.id -eq $pid) {
+                                        "$([char]0x1b)[38;5;47m$($_.SI)$([char]0x1b)[0m"
+                                    }
+                                    else {
+                                        $_.SI
+                                        }
+                                </ScriptBlock>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <ScriptBlock>
+                                    if ($_.id -eq $pid) {
+                                        "$([char]0x1b)[38;5;47m$($_.processname)$([char]0x1b)[0m"
+                                    }
+                                    else {
+                                        $_.processname
+                                    }
                                 </ScriptBlock>
                             </TableColumnItem>
                         </TableColumnItems>

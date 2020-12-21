@@ -8,7 +8,7 @@
     RootModule           = 'WTToolBox.psm1'
 
     # Version number of this module.
-    ModuleVersion        = '1.11.1'
+    ModuleVersion        = '1.12.0'
 
     # Supported PSEditions
     CompatiblePSEditions = @('Desktop', 'Core')

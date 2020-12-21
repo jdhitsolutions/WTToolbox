@@ -6,11 +6,17 @@ Function Test-WTVersion {
 
     Write-Verbose "[$((Get-Date).TimeofDay)] Starting $($myinvocation.MyCommand)"
     Write-Verbose "[$((Get-Date).TimeofDay)] Get the currently installed application"
-
-    $pkg = GetWTPackage
+    #only check if not running the Preview build
+    if (Test-IsWTPreview) {
+        Write-Host "You are running the Windows Terminal Preview" -ForegroundColor Yellow
+        $pkg = GetWTPackage -preview
+    }
+    else {
+         $pkg = GetWTPackage
+    }
 
     If ($pkg) {
-
+        $pkg | Out-String | Write-Verbose
         #get the version number
         [version]$current = $pkg.Version
         Write-Verbose "[$((Get-Date).TimeofDay)] Found version $current"

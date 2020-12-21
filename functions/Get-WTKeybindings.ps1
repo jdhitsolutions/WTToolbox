@@ -4,7 +4,7 @@ Function Get-WTKeyBinding {
     [alias("gwtk")]
     Param(
         [Parameter(HelpMessage = "Select an action type.")]
-        [ArgumentCompleter({'adjustFontSize','closeOtherTabs','closePane','closeTabsAfter','closeWindow','commandPalette','copy','duplicateTab','find','moveFocus','newTab','nextTab','openNewTabDropdown','openSettings','openTabColorPicker','paste','prevTab','resetFontSize','resizePane','scrollDown','scrollDownPage','scrollUp','scrollUpPage','splitPane','switchToTab','toggleAlwaysOnTop','toggleFocusMode','toggleFullscreen','togglePaneZoom','toggleRetroEffect'})]
+        [ArgumentCompleter( { 'adjustFontSize', 'closeOtherTabs', 'closePane', 'closeTabsAfter', 'closeWindow', 'commandPalette', 'copy', 'duplicateTab', 'find', 'moveFocus', 'newTab', 'nextTab', 'openNewTabDropdown', 'openSettings', 'openTabColorPicker', 'paste', 'prevTab', 'resetFontSize', 'resizePane', 'scrollDown', 'scrollDownPage', 'scrollUp', 'scrollUpPage', 'splitPane', 'switchToTab', 'toggleAlwaysOnTop', 'toggleFocusMode', 'toggleFullscreen', 'togglePaneZoom', 'toggleRetroEffect' })]
         [ValidateNotNullOrEmpty()]
         [string]$Action
     )
@@ -50,23 +50,28 @@ Function Get-WTKeyBinding {
     else {
         [object[]]$actionData = $defaultsettings.actions
     }
-    Write-Verbose "[$((Get-Date).TimeofDay)] Parsing $($actionData.count) default items"
 
-    [object[]]$keys = $actionData | parsesetting | Select-Object -Property *, @{Name = "Source"; Expression = { "Defaults" } }
+    if ($actionData.count -gt 0) {
+        Write-Verbose "[$((Get-Date).TimeofDay)] Parsing $($actionData.count) default items"
 
-    Write-Verbose "[$((Get-Date).TimeofDay)] Found $($keys.count) default keybindings"
-    #add the keybinding objects to the list
-    if ($keys.count -gt 0) {
-        foreach ($k in $keys) {
-            #adding individually to the list because of how $keys is getting generated, especially when filtering on an action
-            #12/17/2020 jdh
-            #insert a typename 12/18/2020 jdh
-            #insert a typename
-            $k.psobject.typenames.insert(0,"wtKeyBinding")
-            $list.add($k)
+        [object[]]$keys = $actionData | parsesetting | Select-Object -Property *, @{Name = "Source"; Expression = { "Defaults" } }
+
+        Write-Verbose "[$((Get-Date).TimeofDay)] Found $($keys.count) default keybindings"
+        #add the keybinding objects to the list
+        if ($keys.count -gt 0) {
+            foreach ($k in $keys) {
+                #adding individually to the list because of how $keys is getting generated, especially when filtering on an action
+                #12/17/2020 jdh
+                #insert a typename 12/18/2020 jdh
+                #insert a typename
+                $k.psobject.typenames.insert(0, "wtKeyBinding")
+                $list.add($k)
+            }
         }
     }
-
+    else {
+        Write-Warning "No matching actions found under default settings."
+    }
     $settingsjson = $global:wtsettingspath
     Write-Verbose "[$((Get-Date).TimeofDay)] Getting user settings from $settingsjson"
 
@@ -91,13 +96,13 @@ Function Get-WTKeyBinding {
 
             #if there is a duplicate key binding, remove the default
             foreach ($item in $user) {
-                $existing = $list.where({ $_.keys -eq $item.keys })
+                $existing = $list.where( { $_.keys -eq $item.keys })
                 if ($existing) {
                     Write-Verbose "[$((Get-Date).TimeofDay)] Detected an override of $($existing| Out-String)"
                     [void]($list.Remove($existing))
                 }
                 #insert a typename
-                $item.psobject.typenames.insert(0,"wtKeyBinding")
+                $item.psobject.typenames.insert(0, "wtKeyBinding")
                 #add the entry
                 $list.Add($item)
             }
