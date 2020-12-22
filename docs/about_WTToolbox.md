@@ -20,6 +20,7 @@ The module consists of these commands:
     Test-WTVersion
     Get-WTCurrentRelease
     Install-WTRelease
+    Test-IsWTPreview
 
 The help documentation and examples should be self-explanatory.
 

@@ -1,8 +1,16 @@
 # Change Log for WTToolBox
 
+## v1.13.0
+
++ Updated `Get-WTProcess` to better handle PowerShell 7 preview sessions. This also fixes a related bug with `Open-WTDefault`. (Issue #11)
++ Added new table view called `keys` for `WTKeybinding` objects.
++ Updated table view in `wtKeybinding.format.ps1xml` to use static column widths.
++ Added `Test-IsWTPreview` as an exported function.
++ Help updates.
++ Updated Pester Tests
+
 ## v1.12.0
 
-+ Updated `Get-WTProcess` to better handle PowerShell preview sessions. (Issue #11)
 + Updated `Get-WTKeybinding` to better handle errors when action type not found. (Issue #10)
 + Fixed issue when importing the module running the Preview version of Windows Terminal. (Issue #13)
 + Added private function `Test-IsWTPreview`.

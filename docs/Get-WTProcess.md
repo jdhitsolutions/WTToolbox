@@ -19,7 +19,7 @@ Get-WTProcess [<CommonParameters>]
 
 ## DESCRIPTION
 
-Use this command to get all processes that are part of the current Windows Terminal application. The command output is a regular System.Diagnostics.Process object. However, the default formatting will highlight the your PowerShell process in green text.
+Use this command to get all processes that are part of the current Windows Terminal application. The command output is a regular System.Diagnostics.Process object. However, the default formatting will highlight your PowerShell process in green text. Note that if you are running nested processes, that is PowerShell running PowerShell, you may get incomplete or incorrect results.
 
 ## EXAMPLES
 

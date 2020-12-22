@@ -27,6 +27,7 @@ If you want some background information on Windows Terminal, take a look at [htt
 * [Test-WTVersion](docs/Test-WTVersion.md)
 * [Get-WTCurrentRelease](docs/Get-WTCurrentRelease.md)
 * [Install-WTRelease](docs/Install-WTRelease.md)
+* [Test-IsWTPreview](docs/Test-IsWTPreview.md)
 
 ### Installing Windows Terminal
 
@@ -45,28 +46,38 @@ Keeping track of all the possible keyboard shortcuts or keybindings can be diffi
 ```powershell
 PS C:\> Get-WTKeyBinding
 
-
    Source: Defaults
 
-Action             ActionSettings        Keys
-------             --------------        ----
-closeWindow                              alt+f4
-toggleFullscreen                         alt+enter
-toggleFullscreen                         f11
+Action               ActionSettings                           Keys
+------               --------------                           ----
+closeWindow                                                   alt+f4
+toggleFullscreen                                              alt+enter
+toggleFullscreen                                              f11
 toggleFocusMode
 toggleAlwaysOnTop
-openNewTabDropdown                       ctrl+shift+space
-openSettings                             ctrl+,
-openSettings       target = defaultsFile ctrl+alt+,
+openNewTabDropdown                                            ctrl+shift+space
+openSettings                                                  ctrl+,
+openSettings         target = defaultsFile                    ctrl+alt+,
+find                                                          ctrl+shift+f
+toggleRetroEffect
 ...
-   Source: Settings
 
-Action    ActionSettings                         Keys
-------    --------------                         ----
-copy      singleLine = False                     ctrl+c
-paste                                            ctrl+v
-find                                             ctrl+shift+f
-splitPane split = auto;splitMode = duplicate     alt+shift+d
+Source: Settings
+
+Action               ActionSettings                           Keys
+------               --------------                           ----
+copy                 singleLine = False                       ctrl+c
+paste                                                         ctrl+v
+find                                                          ctrl+shift+f
+splitPane            split = auto;splitMode = duplicate       alt+shift+d
+newTab               profile = Ubuntu                         ctrl+shift+u
+splitPane            split = auto;profile = PS7 No            ctrl+shift+>
+                     Profile;startingDirectory =
+                     C:\;tabTitle = PS7 Clean
+splitPane            split = auto;profile = Windows           ctrl+shift+<
+                     PowerShell No Profile;startingDirectory
+                     = C:\;tabTitle = PS Clean
+openTabColorPicker                                            ctrl+/
 ```
 
 You can also select a specific action:
@@ -201,8 +212,12 @@ The method doesn't write anything to the pipeline.
 
 _A quick note on the `settings` and `default` objects. The JSON standard does not recognize comments, yet they are used in `Windows Terminal` settings files. You can see them with leading // characters. To avoid errors when converting the JSON to objects, these comments must be stripped out of the content. The clean-up process is done with a regular expression. PowerShell 7 is more forgiving if it detects comments. Windows PowerShell will refuse to convert the content from JSON. Although the module can handle JSON comments, the recommendation is that if you are using comments, that you insert a space after the leading slashes like this:  `// this is a comment`._
 
+## Known Issues
+
+The Pester tests for this module will most likely fail when run under Pester 5.x. They are designed for Pester version 4.10.1 and need to be revised to meet the latest Pester test format.
+
 ## Future Versions
 
 If you have any suggestions for enhancements or bug reports, please use the [Issues](https://github.com/jdhitsolutions/WTToolbox/issues) section of this repository.
 
-Last Updated *2020-12-21 15:37:37Z*
+Last Updated *2020-12-22 15:12:37Z*

@@ -55,6 +55,24 @@ Keys           : ctrl+0
 
 Display a specific action. Wildcards are permitted.
 
+### EXAMPLE 3
+
+```powershell
+PS C:\> Get-WTKeyBinding | where keys | sort keys | Format-Table -view keys
+
+Keys              ActionSettings                   Action              Source
+----              --------------                   ------              ------
+alt+down          direction = down                 moveFocus           Defaults
+alt+enter                                          toggleFullscreen    Defaults
+alt+f4                                             closeWindow         Defaults
+alt+left          direction = left                 moveFocus           Defaults
+alt+right         direction = right                moveFocus           Defaults
+alt+shift+-       split = horizontal               splitPane           Defaults
+...
+```
+
+Get all key bindings where a key combination has been assigned and display the results the Keys table view.
+
 ## PARAMETERS
 
 ### -Action

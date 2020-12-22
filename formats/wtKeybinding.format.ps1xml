@@ -27,22 +27,22 @@ https://github.com/jdhitsolutions/PSScriptTools
         <Label>Source</Label>
       </GroupBy>
       <TableControl>
-        <!--Delete the AutoSize node if you want to use the defined widths.-->
-        <AutoSize />
+        <!--Delete the AutoSize node if you want to use the defined widths.
+        <AutoSize />-->
         <TableHeaders>
           <TableColumnHeader>
             <Label>Action</Label>
-            <Width>15</Width>
+            <Width>20</Width>
             <Alignment>left</Alignment>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>ActionSettings</Label>
-            <Width>24</Width>
+            <Width>40</Width>
             <Alignment>left</Alignment>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Keys</Label>
-            <Width>13</Width>
+            <Width>20</Width>
             <Alignment>left</Alignment>
           </TableColumnHeader>
         </TableHeaders>
@@ -110,6 +110,62 @@ https://github.com/jdhitsolutions/PSScriptTools
           </ListEntry>
         </ListEntries>
       </ListControl>
+    </View>
+    <View>
+      <!--Created 12/21/2020 12:04:28 by PROSPERO\Jeff-->
+      <Name>keys</Name>
+      <ViewSelectedBy>
+        <TypeName>wtKeyBinding</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <!--Delete the AutoSize node if you want to use the defined widths.
+        <AutoSize />-->
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Keys</Label>
+            <Width>20</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ActionSettings</Label>
+            <Width>40</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Action</Label>
+            <Width>20</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Source</Label>
+            <Width>10</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <Wrap />
+            <TableColumnItems>
+              <!--
+            By default the entries use property names, but you can replace them with scriptblocks.
+            <ScriptBlock>$_.foo /1mb -as [int]</ScriptBlock>
+-->
+              <TableColumnItem>
+                <PropertyName>Keys</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ActionSettings</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Action</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Source</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
     </View>
   </ViewDefinitions>
 </Configuration>

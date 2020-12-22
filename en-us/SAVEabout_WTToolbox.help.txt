@@ -15,6 +15,7 @@ LONG DESCRIPTION
         Get-WTCurrent
         Open-WTDefault
         Test-WTVersion
+        Test-IsWTPreview
         Get-WTCurrentRelease
         Install-WTRelease
 

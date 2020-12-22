@@ -86,17 +86,3 @@ Function GetWTPackage {
     }
 }
 
-Function Test-IsWTPreview {
-    [cmdletbinding()]
-    [outputtype([Boolean])]
-    Param()
-
-    #get current process
-    $current = Get-CimInstance win32_process -Filter "processid=$pid"
-
-    #get WindowsTerminal parent
-    $parent = Get-CimInstance win32_process -Filter "processid=$($current.parentprocessid)"
-
-    #test if path matches the preview executable
-    $parent.ExecutablePath -match "WindowsTerminalPreview"
-}

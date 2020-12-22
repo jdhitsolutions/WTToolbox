@@ -52,3 +52,24 @@ Function Test-WTVersion {
     }
     Write-Verbose "[$((Get-Date).TimeofDay)] Ending $($myinvocation.MyCommand)"
 } #close function
+
+Function Test-IsWTPreview {
+    [cmdletbinding()]
+    [outputtype([Boolean])]
+    Param()
+
+    Write-Verbose "[$((Get-Date).TimeofDay)] Starting $($myinvocation.MyCommand)"
+    Write-Verbose "[$((Get-Date).TimeofDay)] Getting process id $pid"
+    #get current process
+    $current = Get-CimInstance win32_process -Filter "processid=$pid"
+
+    #get WindowsTerminal parent
+    Write-Verbose "[$((Get-Date).TimeofDay)] Getting parent process id $($current.parentprocessid)"
+    $parent = Get-CimInstance win32_process -Filter "processid=$($current.parentprocessid)"
+
+    #test if path matches the preview executable
+    Write-Verbose "[$((Get-Date).TimeofDay)] Testing path $($parent.ExecutablePath)"
+    $parent.ExecutablePath -match "WindowsTerminalPreview"
+    
+    Write-Verbose "[$((Get-Date).TimeofDay)] Ending $($myinvocation.MyCommand)"
+}

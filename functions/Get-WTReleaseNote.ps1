@@ -18,7 +18,7 @@ Function Get-WTReleaseNote {
     Try {
         Write-Verbose "[$((Get-Date).TimeofDay)] Getting information from $uri"
         $get = Invoke-Restmethod -uri $uri -Method Get -ErrorAction stop
-
+$get | out-string | write-verbose
         if ($Preview) {
             Write-Verbose "[$((Get-Date).TimeofDay)] Getting PREVIEW release information"
             $data = $get | Where-Object { $_.prerelease } | Select-Object -first 1
@@ -27,7 +27,7 @@ Function Get-WTReleaseNote {
             Write-Verbose "[$((Get-Date).TimeofDay)] Getting STABLE release information"
             $data = $get | Where-Object { -Not $_.prerelease } | Select-Object -first 1
         }
-
+$data | out-string | write-verbose
         $data | Select-Object -Property Name,tag_name,published_at,prerelease,
 
         @{Name="bodyLength";Expression = {$_.body.length}} | Out-String | Write-Verbose
