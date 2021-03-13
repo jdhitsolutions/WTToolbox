@@ -112,7 +112,7 @@ Use `Get-WTCurrent` to display the settings for the current PowerShell session i
 Because `Windows Terminal` can silently update, it may be awkward to know if you are running a new version. You might use the `Test-WTVersion` command in your PowerShell profile script like this:
 
 ```powershell
-if ( $env:wt_session -AND Test-WTVersion) {
+if ( $env:wt_session -AND (Test-WTVersion)) {
     Write-Host "A newer version of Windows Terminal is now installed." -foreground Yellow
     Start-Process https://github.com/microsoft/terminal/releases
 }
@@ -132,9 +132,9 @@ You can also use [Get-WTCurrentRelease](docs/Get-WTCurrentRelease.md) to get a q
 PS C:\> Get-WTCurrentRelease
 
 
-Name                         Version     Released              LocalVersion
-----                         -------     --------              ------------
-Windows Terminal v1.4.3243.0 v1.4.3243.0 11/20/2020 9:43:33 PM 1.4.3243.0
+Name                          Version      Released            LocalVersion
+----                          -------      --------            ------------
+Windows Terminal v1.6.10571.0 v1.6.10571.0 3/1/2021 6:00:26 PM 1.6.10571.0
 ```
 
 ### Windows Terminal Processes
