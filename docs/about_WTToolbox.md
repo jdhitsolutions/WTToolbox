@@ -70,7 +70,7 @@ Because `Windows Terminal` can silently update, it may be awkward to know if
 you are running a new version. You might use the `Test-WTVersion` command in
 your PowerShell profile script like this:
 
-if ( $env:wt_session -AND Test-WTVersion) {
+if ( $env:wt_session -AND (Test-WTVersion)) {
   Write-Host "A newer version of Windows Terminal is now installed."
   Start-Process https://github.com/microsoft/terminal/releases
 }
