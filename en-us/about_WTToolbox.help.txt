@@ -13,11 +13,17 @@ LONG DESCRIPTION
         Get-WTReleaseNote
         Get-WTProcess
         Get-WTCurrent
+        Get-WTProfile
+        Get-WTColorScheme
         Open-WTDefault
+        Set-WTDefaultProfile
         Test-WTVersion
         Test-IsWTPreview
         Get-WTCurrentRelease
         Install-WTRelease
+        Export-WTProfile
+        Import-WTProfile
+        New-WTProfile
 
     The help documentation and examples should be self-explanatory.
 

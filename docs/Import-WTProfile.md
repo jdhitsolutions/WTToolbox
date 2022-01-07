@@ -1,35 +1,43 @@
 ---
 external help file: WTToolBox-help.xml
 Module Name: WTToolBox
-online version: https://bit.ly/3e874EH
+online version:
 schema: 2.0.0
 ---
 
-# Backup-WTSetting
+# Import-WTProfile
 
 ## SYNOPSIS
 
-Backup Windows Terminal settings.json file.
+Import a Windows Terminal profile.
 
 ## SYNTAX
 
 ```yaml
-Backup-WTSetting [[-Limit] <Int32>] [-Destination] <String> [-Passthru] [-WhatIf] [-Confirm] [<CommonParameters>]
+Import-WTProfile [-Path] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-Use this command to create a backup copy of the settings.json file for Windows Terminal. Each backup will be numbered up to the specified limit. The oldest file will be called settings.bak1.json, with the number incrementing for each backup.
+If you exported Windows Terminal profiles to a Json file, you can use Import-WTProfile to add them to your settings file. You might do this when setting up a new desktop or restoring a backup. The imported profiles must have unique names. It is assumed the guids are unique and will not conflict with existing profile guids. All imported profiles will go to the top of your profile list.
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS C:\> Backup-WTSetting -destination D:\OneDrive\Backups
+PS C:\> Import-WTProfile c:\work\saved.json -Verbose
+VERBOSE: [12:46:33.2526304 BEGIN  ] Starting Import-WTProfile
+VERBOSE: [12:46:33.2588630 PROCESS] Importing Windows Terminal profiles from c:\work\saved.json
+VERBOSE: [12:46:33.2603038 PROCESS] Found 3 profiles
+VERBOSE: [12:46:33.2607900 PROCESS] Importing PS7.2 No Profile
+WARNING: There is already a profile with the name of Windows PowerShell No Profile. Skipping import.
+VERBOSE: [12:46:33.2612329 PROCESS] Importing WinCmd
+VERBOSE: [12:46:33.2622307 END    ] Update settings.json
+VERBOSE: [12:46:33.2763273 END    ] Ending Import-WTProfile
 ```
 
-Create backups to D:\OneDrive\Backups using the default limit.
+Import profiles from a Json file created with Export-WTProfile.
 
 ## PARAMETERS
 
@@ -44,14 +52,14 @@ Aliases: cf
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Destination
+### -Path
 
-Specify the backup location. It must exist.
+Specify the path to a json file created with Export-WTProfile.
 
 ```yaml
 Type: String
@@ -59,24 +67,8 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Limit
-
-The number of backup files to keep.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
 Position: 0
-Default value: 7
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -90,22 +82,6 @@ The cmdlet is not run.
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases: wi
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Passthru
-
-Write backup file objects to the pipeline. Otherwise the command doesn't write anything to the pipeline.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
 
 Required: False
 Position: Named
@@ -126,12 +102,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### None
 
-### System.IO.FileInfo
-
 ## NOTES
-
-This command has an alias of bwt.
 
 Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
 
 ## RELATED LINKS
+
+[Export-WTProfile](Export-WTProfile.md)

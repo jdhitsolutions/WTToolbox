@@ -14,8 +14,8 @@ InModuleScope WTToolBox {
             { Test-ModuleManifest -Path "$PSScriptRoot\..\WTToolBox.psd1" } | Should Not Throw True
         }
 
-        It "Should export 10 functions" {
-            ( (Get-Module WTToolbox).ExportedFunctions).count | Should Be 10
+        It "Should export 16 functions" {
+            ( (Get-Module WTToolbox).ExportedFunctions).count | Should Be 16
         }
 
         $psdata = (Get-Module WTToolBox).PrivateData.psdata

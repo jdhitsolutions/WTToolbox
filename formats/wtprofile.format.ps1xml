@@ -1,0 +1,76 @@
+<!--
+Format type data generated 12/29/2021 11:16:57 by THINKX1-JH\Jeff
+
+This file was created using the New-PSFormatXML command that is part
+of the PSScriptTools module.
+
+https://github.com/jdhitsolutions/PSScriptTools
+-->
+<Configuration>
+  <ViewDefinitions>
+    <View>
+      <!--Created 12/29/2021 11:16:57 by THINKX1-JH\Jeff-->
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>wtProfile</TypeName>
+      </ViewSelectedBy>
+      <GroupBy>
+        <!--
+            You can also use a scriptblock to define a custom property name.
+            You must have a Label tag.
+            <ScriptBlock>$_.machinename.toUpper()</ScriptBlock>
+            <Label>Computername</Label>
+
+            Use <Label> to set the displayed value.
+-->
+        <ScriptBlock>
+         $text = "{0} [{1}]" -f $_.Name,$_.GUID
+         <!-- display hidden profile names in red-->
+         if ($host.name -match "console" -AND $_.Hidden) {
+           "$([char]27)[31m$text$([char]27)[0m"
+         }
+         elseif ($host.name -match "console" -AND $_.IsDefault) {
+          <!-- display default profile names in green-->
+           "$([char]27)[92m$text$([char]27)[0m"
+         }
+         else {
+           $text
+         }
+         </ScriptBlock>
+        <Label>Name</Label>
+      </GroupBy>
+      <TableControl>
+        <!--Delete the AutoSize node if you want to use the defined widths.
+        <AutoSize />-->
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Title</Label>
+            <Width>30</Width>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>SourceCommand</Label>
+            <Alignment>left</Alignment>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <Wrap />
+            <TableColumnItems>
+              <!--
+            By default the entries use property names, but you can replace them with scriptblocks.
+            <ScriptBlock>$_.foo /1mb -as [int]</ScriptBlock>
+-->
+              <TableColumnItem>
+                <PropertyName>Title</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>SourceCommand</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>

@@ -8,7 +8,6 @@ The WTToolBox module is a set of PowerShell functions for managing and working
 with the Windows Terminal application from Microsoft.
 
 # LONG DESCRIPTION
-
 The module consists of these commands:
 
     Backup-WTSetting
@@ -16,15 +15,22 @@ The module consists of these commands:
     Get-WTReleaseNote
     Get-WTProcess
     Get-WTCurrent
+    Get-WTProfile
+    Get-WTColorScheme
     Open-WTDefault
+    Set-WTDefaultProfile
     Test-WTVersion
     Get-WTCurrentRelease
     Install-WTRelease
     Test-IsWTPreview
+    Export-WTProfile
+    Import-WTProfile
+    New-WTProfile
 
 The help documentation and examples should be self-explanatory.
 
 ## Displaying Key Bindings
+
     Keeping track of all the possible keyboard shortcuts or keybindings can be
     difficult. Get-WTKeyBinding will go through all defined keybindings and
     display them. You can also select a specific action:

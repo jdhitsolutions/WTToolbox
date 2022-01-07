@@ -19,15 +19,21 @@ If you want some background information on Windows Terminal, take a look at [htt
 ## Module Commands
 
 * [Backup-WTSetting](docs/Backup-WTSetting.md)
-* [Get-WTKeyBinding](docs/Get-WTKeyBinding.md)
-* [Get-WTReleaseNote](docs/Get-WTReleaseNote.md)
-* [Get-WTProcess](docs/Get-WTProcess.md)
+* [Export-WTProfile](docs/Export-WTProfile.md)
+* [Get-WTColorScheme](docs/Get-WTColorScheme.md)
 * [Get-WTCurrent](docs/Get-WTCurrent.md)
-* [Open-WTDefault](docs/Open-WTDefault.md)
-* [Test-WTVersion](docs/Test-WTVersion.md)
 * [Get-WTCurrentRelease](docs/Get-WTCurrentRelease.md)
+* [Get-WTKeyBinding](docs/Get-WTKeyBinding.md)
+* [Get-WTProcess](docs/Get-WTProcess.md)
+* [Get-WTProfile](docs/Get-WTProfile.md)
+* [Get-WTReleaseNote](docs/Get-WTReleaseNote.md)
+* [Import-WTProfile](docs/Import-WTProfile.md)
 * [Install-WTRelease](docs/Install-WTRelease.md)
+* [New-WTProfile](docs/New-WTProfile.md)
+* [Open-WTDefault](docs/Open-WTDefault.md)
+* [Set-WTDefaultProfile](docs/Set-WTDefaultProfile.md)
 * [Test-IsWTPreview](docs/Test-IsWTPreview.md)
+* [Test-WTVersion](docs/Test-WTVersion.md)
 
 ### Installing Windows Terminal
 
@@ -107,7 +113,7 @@ Use `Get-WTCurrent` to display the settings for the current PowerShell session i
 
 ![Get-WTCurrent](assets/wtcurrent.png)
 
-### Tracking Windows Terminal Version
+### Tracking Windows Terminal Releases
 
 Because `Windows Terminal` can silently update, it may be awkward to know if you are running a new version. You might use the `Test-WTVersion` command in your PowerShell profile script like this:
 
@@ -131,10 +137,9 @@ You can also use [Get-WTCurrentRelease](docs/Get-WTCurrentRelease.md) to get a q
 ```powershell
 PS C:\> Get-WTCurrentRelease
 
-
-Name                          Version      Released            LocalVersion
-----                          -------      --------            ------------
-Windows Terminal v1.6.10571.0 v1.6.10571.0 3/1/2021 6:00:26 PM 1.6.10571.0
+Name                          Version      Released              LocalVersion
+----                          -------      --------              ------------
+Windows Terminal v1.11.3471.0 v1.11.3471.0 12/14/2021 8:43:27 PM 1.11.3471.0
 ```
 
 ### Windows Terminal Processes
@@ -165,7 +170,7 @@ initialCols initialRows
         120          30
 ```
 
-When you import the module, it will also create a variable called `$WTDefaultsPath,` which points to the `defaults.json` file. The variable makes it easier if you want to do something with it like make a copy. If you need to view the file, you can use the `Open-WTDefault` command.
+When you import the module, it will also create a variable called `$WTDefaultsPath,` which points to the `defaults.json` file. The variable makes it easier if you want to do something with it like make a copy. If you need to view the file, you can use the [Open-WTDefault](docs/Open-WTDefault.md) command.
 
 > If you have a preview release also installed, this variable will have two objects.
 
@@ -174,7 +179,7 @@ When you import the module, it will also create a variable called `$WTDefaultsPa
 The last object is a customized version of the data in `settings.json`. `$WTSettings` should make it easier to see your settings.
 
 ```powershell
-PS C:\> $wtsettings.profiles.list | where-object hidden
+PS C:\> $wtsettings.profiles.list | Where-Object hidden
 
 guid       : {b453ae62-4e3d-5e58-bget989-0a998ec441b8}
 hidden     : True
@@ -212,6 +217,66 @@ The method doesn't write anything to the pipeline.
 
 _A quick note on the `settings` and `default` objects. The JSON standard does not recognize comments, yet they are used in `Windows Terminal` settings files. You can see them with leading // characters. To avoid errors when converting the JSON to objects, these comments must be stripped out of the content. The clean-up process is done with a regular expression. PowerShell 7 is more forgiving if it detects comments. Windows PowerShell will refuse to convert the content from JSON. Although the module can handle JSON comments, the recommendation is that if you are using comments, that you insert a space after the leading slashes like this:  `// this is a comment`._
 
+## Windows Terminal Profiles
+
+Beginning with version 1.14.0 of this module, you can use PowerShell functions to manage Windows Terminal profiles instead of relying on the module variables like `$wtsettings`.
+
+### Getting Windows Terminal Profiles
+
+You can use [Get-WTProfile](docs/Get-WTProfile.md) to return all defined Windows Terminal Profiles. The default behavior is to get all non-hidden profiles. The default profile will be highlighted in green.
+
+![get-wtprofile](assets/get-wtprofile.png)
+
+The command displays formatted results. But there are other properties you can view.
+
+![wtprofile properties](assets/get-wtprofile-properties.png)
+
+If you opt to view hidden profiles as well, those will be highlighted in red or at least whatever is close to red depending on your color scheme.
+
+![hidden wtprofiles](assets/get-wtprofile-hidden.png)
+
+### Set Default Profile
+
+Use [Set-WTDefaultProfile](docs/Set-WTDefaultProfile.md) to assign a profile from the PowerShell prompt. The easiest approach is to use `Get-WTProfile` to select a single profile and pipe that to the function.
+
+![set-wtdefaultprofile](assets/set-wtdefaultprofile.png)
+
+### Creating a New Profile
+
+You can use [New-WTProfile](docs/New-WTProfile.md) to create a new profile. The command parameters will set the most commonly used profile settings. You can manually adjust the profile after it has been created.
+
+```powershell
+New-WTProfile -Name CMD -CommandLine cmd.exe -TabTitle Windows -CursorShape vintage -StartingDirectory "%WINDIR%"
+```
+
+Note that some values are case-sensitive. Use tab-completion wherever it is enabled for command parameters. The new profile will be inserted at the beginning of the profile list. You will need to manually edit the settings file to re-order profiles.
+
+### Exporting Profiles
+
+For backup or testing purposes, you may want to export your custom Windows Terminal profiles with [Export-WTProfile](docs/Export-WTProfile.md). The default is to export all profiles with a commandline property. This command will not export built-in profiles like Azure Cloud Shell. You can also specify profiles to export. Wildcards are permitted.
+
+![export-profile](assets/export-wtprofile.png)
+
+The export path must be a Json file.
+
+### Importing Profiles
+
+Once you have an export file, you can use [Import-WTProfile](docs/Import-WTProfile.md) into your current settings. The profile name must not already exist. It is assumed the guids you are importing will be unique. Unlike using `New-WTProfile` the import process will set all profile settings that you exported.
+
+![import-profile](assets/import-wtprofile.png)
+
+Profiles with duplicate names will be skipped.
+
+## Windows Terminal Color Schemes
+
+`Get-WTColorScheme` is designed to show you the defined color schemes. You can select color schemes by name, including the use of wildcards, or use tab-completion. If you omit a name, the default is to get all color schemes.
+
+![get-wtcolorscheme](assets/get-wtcolorscheme.png)
+
+The output will include a sample property formatted using the ANSI equivalent. This allows you to preview a scheme in your terminal session. Some schemes might have different definitions for a color like `red`.
+
+![compare color schemes](assets/compare-color-scheme.png)
+
 ## Known Issues
 
 The Pester tests for this module will most likely fail when run under Pester 5.x. They are designed for Pester version 4.10.1 and need to be revised to meet the latest Pester test format.
@@ -219,5 +284,3 @@ The Pester tests for this module will most likely fail when run under Pester 5.x
 ## Future Versions
 
 If you have any suggestions for enhancements or bug reports, please use the [Issues](https://github.com/jdhitsolutions/WTToolbox/issues) section of this repository.
-
-Last Updated *2020-12-22 15:12:37Z*

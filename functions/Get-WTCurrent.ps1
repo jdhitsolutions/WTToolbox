@@ -1,6 +1,7 @@
 Function Get-WTCurrent {
     [cmdletbinding()]
     [alias('gwtc')]
+    [OutputType("wtProfile")]
     Param ()
     Begin {
         Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($myinvocation.mycommand)"
@@ -16,13 +17,13 @@ Function Get-WTCurrent {
             #Test if user is using the newer List entry in the json file
             #or is using a settings file based on defaults.json
             if ($wtsettings.profiles.list.guid) {
-                $profile = $wtsettings.profiles.list.where({$_.guid -eq $env:WT_PROFILE_ID})
+                $wtProfile = $wtsettings.profiles.list.where({ $_.guid -eq $env:WT_PROFILE_ID })
             }
             elseif ($wtsettings.profiles.guid) {
-                $profile = $wtsettings.profiles.where( {$_.guid -eq $env:WT_PROFILE_ID})
+                $wtProfile = $wtsettings.profiles.where( { $_.guid -eq $env:WT_PROFILE_ID })
             }
-            if ($profile) {
-                $profile
+            if ($wtProfile) {
+                NewWTProfile $wtProfile
             }
             else {
                 Write-Warning "Failed to find a profile with a GUID matching $env:WT_PROFILE_ID"

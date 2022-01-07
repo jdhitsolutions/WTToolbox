@@ -28,18 +28,19 @@ Use this command to display the Windows Terminal profile settings for the curren
 ```powershell
 PS C:\> Get-WTCurrent
 
-acrylicOpacity             : 0.6
-commandline                : C:\Program Files\PowerShell\7\pwsh.exe -nologo
-guid                       : {993855ad-b0eb-4f3d-8370-1a8d5b53abb5}
-icon                       : %USERPROFILE%\OneDrive\windowsterminal\ProfileIcons\pwsh.scale-150.png
-name                       : PowerShell 7
-tabTitle                   : PS 7
-backgroundImage            : C:\Users\Jeff\OneDrive\terminalthumbs\Snover-head.png
-backgroundImageAlignment   : bottomRight
-backgroundImageStretchMode : none
-backgroundImageOpacity     : 0.75
-useAcrylic                 : True
+
+   Name: Windows PowerShell No Profile [{ca3da2bd-de18-40f7-9fc6-234345d1e89f}]
+
+Title                          SourceCommand
+-----                          -------------
+PS No Profile                  powershell.exe -nologo -noexit -noprofile -file
+                               c:\scripts\miniprofile51.ps1
 ```
+
+The output is custom object that may not reflect all of the defined setting. You can use use the $WTSettings variable to discover them with an expression like:
+
+$WTSettings.profiles.list | Where {$_.guid -eq $wtsettings.defaultProfile}
+
 
 ## PARAMETERS
 
@@ -53,7 +54,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### wtProfile
 
 ## NOTES
 
@@ -63,3 +64,5 @@ Learn more about PowerShell:
 http://jdhitsolutions.com/blog/essential-powershell-resources/
 
 ## RELATED LINKS
+
+[Get-WTProfile](Get-WTProfile.md)

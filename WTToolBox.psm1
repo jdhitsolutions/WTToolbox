@@ -99,3 +99,35 @@ else {
         $VerbosePreference = "SilentlyContinue"
     }
 #endregion
+
+#region completers
+
+
+Register-ArgumentCompleter -CommandName Get-WTProfile -ParameterName Name -ScriptBlock {
+    param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameter)
+
+    #PowerShell code to populate $wordtoComplete
+
+    $global:wtsettings.profiles.list |
+    where-object {$_.name -like "*$wordtoComplete*"} |
+        ForEach-Object {
+            # completion text,listitem text,result type,Tooltip
+            [System.Management.Automation.CompletionResult]::new("'$($_.name)'", $_.name, 'ParameterValue', $(if ($_.hidden) {"Hidden"} else {"Listed"}))
+        }
+}
+
+
+Register-ArgumentCompleter -CommandName Get-WTColorScheme -ParameterName Name -ScriptBlock {
+    param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameter)
+
+    #PowerShell code to populate $wordtoComplete
+
+    $global:wtsettings.schemes |
+    where-object {$_.name -like "*$wordtoComplete*"} |
+        ForEach-Object {
+            # completion text,listitem text,result type,Tooltip
+            [System.Management.Automation.CompletionResult]::new("'$($_.name)'", $_.name, 'ParameterValue', $_.name)
+        }
+}
+
+#endregion

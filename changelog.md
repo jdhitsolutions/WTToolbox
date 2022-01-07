@@ -1,5 +1,21 @@
 # Change Log for WTToolBox
 
+## v1.14.0
+
+This is a significant upgrade with many new commands. It is assumed you are running a recent version of Windows Terminal and that your profile uses `List` configuration. Early versions used a different layout in the settings.json file.
+
++ Added command `Get-WTProfile`.
++ Added new object `wtProfile` to `Get-WTCurrent`.
++ Added private function `NewWTProfile` to create `wtprofile` objects.
++ Added format file `wtprofile.format.ps1xml` for the new object type.
++ Added command `Set-WTDefaultProfile` to set default Windows Terminal profile.
++ Added command `Get-WTColorScheme` and private function `Convert-HtmltoAnsi`.
++ Added format file `wtcolorscheme.format.ps1xml`.
++ Added command `New-WTProfile` to create a new profile in the settings.json file.
++ Added commands `Export-WTProfile` and `Import-WTProfile`.
++ Help updates.
++ Updated `README.md`.
+
 ## v1.13.0
 
 + Updated `Get-WTProcess` to better handle PowerShell 7 preview sessions. This also fixes a related bug with `Open-WTDefault`. (Issue #11)
