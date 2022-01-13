@@ -16,6 +16,10 @@ Of course, it is assumed you have `Windows Terminal` installed, or you plan to i
 
 If you want some background information on Windows Terminal, take a look at [https://devblogs.microsoft.com/commandline/getting-started-with-windows-terminal/](https://devblogs.microsoft.com/commandline/getting-started-with-windows-terminal/).
 
+### __Important__
+
+Windows Terminal is intended for use on a Windows 10 or Windows 11 desktop. In fact, it is now the default on Windows 11. You __cannot__ install Windows Terminal on Windows Server 2016 or 2019. Those platform do not meet the Windows Terminal minimal requirements. Based on [issues](https://github.com/microsoft/terminal/issues?q=is%3Aissue+windows+server+2022) in the Windows Terminal Github repository, Windows Terminal should install on Windows Server 2022 but there still appear to be compatibility issue.
+
 ## Module Commands
 
 * [Backup-WTSetting](docs/Backup-WTSetting.md)
