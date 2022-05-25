@@ -1,5 +1,10 @@
 # Change Log for WTToolBox
 
+## v1.15.0
+
++ Fixed installation bug in `Install-WTRelease`. Need to account for Windows 10 or Windows 11 bundle.
++ Updated `README.md`
+
 ## v1.14.0
 
 This is a significant upgrade with many new commands. It is assumed you are running a recent version of Windows Terminal and that your profile uses `List` configuration. Early versions used a different layout in the settings.json file.

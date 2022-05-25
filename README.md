@@ -49,6 +49,8 @@ Install-WTRelease [-preview]
 
 The `Install-WTRelease` function has an alias of `Install-WindowsTerminal`.
 
+:warning: You can't install a version from within Windows Terminal because files will be in use. Close Windows Terminal and run `Install-WTRelease` in a traditional PowerShell window.
+
 ### Displaying Key Bindings
 
 Keeping track of all the possible keyboard shortcuts or keybindings can be difficult. `Get-WTKeyBinding` will go through all defined keybindings and display them.
@@ -141,9 +143,9 @@ You can also use [Get-WTCurrentRelease](docs/Get-WTCurrentRelease.md) to get a q
 ```powershell
 PS C:\> Get-WTCurrentRelease
 
-Name                          Version      Released              LocalVersion
-----                          -------      --------              ------------
-Windows Terminal v1.11.3471.0 v1.11.3471.0 12/14/2021 8:43:27 PM 1.11.3471.0
+Name                        Version       Released             LocalVersion
+----                        -------       --------             ------------
+Windows Terminal v1.13.1143 v1.13.11431.0 5/24/2022 5:01:48 PM 1.13.11432.0
 ```
 
 ### Windows Terminal Processes

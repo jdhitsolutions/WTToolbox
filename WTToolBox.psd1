@@ -5,7 +5,7 @@
 @{
 
     RootModule           = 'WTToolBox.psm1'
-    ModuleVersion        = '1.14.0'
+    ModuleVersion        = '1.15.0'
     CompatiblePSEditions = @('Desktop', 'Core')
     GUID                 = 'd7249a30-1995-47f7-9882-f3b6f246a14b'
     Author               = 'Jeff Hicks'
@@ -24,8 +24,8 @@
     FunctionsToExport    = 'Backup-WTSetting', 'Get-WTKeyBinding', 'Get-WTProcess',
     'Open-WTDefault', 'Test-WTVersion', 'Get-WTReleaseNote', 'Get-WTCurrent',
     'Get-WTCurrentRelease', 'Install-WTRelease', 'Test-IsWTPreview',
-    'Get-WTProfile','Set-WTDefaultProfile','Get-WTColorScheme',
-    'New-WTProfile','Export-WTProfile','Import-WTProfile'
+    'Get-WTProfile', 'Set-WTDefaultProfile', 'Get-WTColorScheme',
+    'New-WTProfile', 'Export-WTProfile', 'Import-WTProfile'
     #VariablesToExport    = ''
     aliasesToExport      = 'Install-WindowsTerminal', 'gwtp', 'gwtc', 'gwtk', 'bwt'
     PrivateData          = @{
